@@ -2,12 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import {useAddress, useContract, useMetamask} from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
+import { useEffect } from 'react';
 
 function App() {
 
+  const OPEN_SEA = "https://opensea.io/collection/rit-hackathon";
   const connectWithMetamask = useMetamask();
   const address = useAddress();
-  const { contract } = useContract(process.env.REACT_APP_CONTRACT_ADDRESS, "nft-drop")
+  const { contract } = useContract(process.env.REACT_APP_CONTRACT_ADDRESS, "nft-drop");
+
+  useEffect(() => {
+    console.log(`I know front-end is bad 😿, You can go to the NFT collection from here 👉 ${OPEN_SEA}`)
+  }, [])
 
   const claimNft = async() => {
     try {
@@ -15,7 +21,7 @@ function App() {
       console.log(tx[0].receipt.blockHash)
       console.log(tx[0].receipt.transactionHash);
     } catch (error) {
-      console.trace(error)
+      console.log(error)
     }
   }
 
@@ -38,6 +44,20 @@ function App() {
     });
     window.location.reload();
   };
+
+  const switchNetwork = async() => {
+    const chainId = 137;
+    if(window.ethereum.networkVersion !== chainId){
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: ethers.utils.hexValue(chainId) }]
+        });
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 
   // const balanceOf = async() => {
   //   try {
@@ -65,6 +85,17 @@ function App() {
           onClick={addNetwork}
           >
         🔴 Add Polygon to Metamask!</button>
+        <button style={{
+          borderRadius: "10px", 
+          border: "0px",
+          height: "3vw",
+          padding: "10px",
+          cursor: "pointer",
+          marginLeft: "10px"
+          }}
+          onClick={switchNetwork}
+          >
+        🟢 Switch to POLYGON!</button>
       </div>
       <img src={logo} className="App-logo" alt="logo" />
         {address ? address : <button onClick={connectWithMetamask}>Connect</button>}
