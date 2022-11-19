@@ -20,7 +20,9 @@ function App() {
       const tx = await contract.claimTo(address, 1); //address,  quantity
       console.log(tx[0].receipt.blockHash)
       console.log(tx[0].receipt.transactionHash);
+      alert("Minting Complete!");
     } catch (error) {
+      alert("Are you allowed to mint NFTs? / Are You trying to mint more than 1 NFT?");
       console.log(error)
     }
   }
