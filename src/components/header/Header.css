@@ -4,11 +4,11 @@
 }
 
 .main-navbar {
-  margin-top: 2%;
+  margin-top: 4%;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* .main-navbar .logo {
@@ -41,14 +41,23 @@
 }
 
 .dropdown .arrow {
-  height: 4vw;
+  height: vw;
   min-width: 135px;
   min-height: 47px;
 }
 
 .dropdown .down {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 1px solid black;
 }
+
+/* .down h3 {
+  height: 3vw;
+  vertical-align: middle;
+} */
 
 .main-navbar .button button {
   cursor: pointer;
