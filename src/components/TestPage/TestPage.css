@@ -1,0 +1,191 @@
+@font-face {
+  font-family: "PP NeueBit";
+  src: url("../assets/fonts/PPNeueBit-Bold.otf");
+}
+
+.frame {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 2%;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: fit-content;
+  align-items: flex-start;
+  width: 60%;
+}
+
+.top {
+  margin-left: 7.5vw;
+  /* width: 35.7vw; */
+}
+
+.top-f {
+  display: flex;
+  justify-content: space-between;
+  font-family: "N27";
+  font-style: italic;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  margin-bottom: 25px;
+  padding: 0px 0.65%;
+}
+
+.hack {
+  font-family: "PP NeueBit";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 8vw;
+  line-height: 6.2vw;
+  letter-spacing: -0.02em;
+  margin-bottom: 3%;
+  transform: translate(0, -25px);
+}
+
+.hack h1 {
+  font-size: 8vw;
+  margin: 0;
+}
+
+.hack h2 {
+  font-size: 8vw;
+  margin: 0;
+}
+
+.year {
+  font-family: "PP Mondwest";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 250px;
+  /* line-height: 369px; */
+  margin: 0px;
+  text-align: left;
+}
+
+.desc {
+  left: 80px;
+  font-family: "N27";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.3vw;
+  line-height: 29px;
+
+  transform: translate(0, -25px);
+  padding: 0% 0.65%;
+}
+
+.right {
+  width: 40%;
+}
+
+.form-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 75%;
+  height: 64px;
+  margin: auto;
+  border: 1px solid black;
+  transform: skew(-25deg);
+
+  /* margin-top: 4.1vh; */
+}
+
+.counter-button {
+  transform: skew(25deg);
+}
+
+.count {
+  transform: skew(25deg);
+  margin: 0;
+  /* height: 20%; */
+  font-family: "PP NeueBit";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+}
+
+.counter {
+  transform: skew(25deg);
+  height: 90%;
+  width: 40%;
+  background-color: black;
+
+  text-align: center;
+}
+
+.mintbtn {
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1vw;
+  line-height: 29px;
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left {
+    width: 90%;
+  }
+  .frame {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    margin-top: 7vh;
+  }
+
+  .top {
+    margin: 0;
+  }
+
+  .top-f {
+    display: block;
+    text-align: center;
+  }
+
+  .hack {
+    line-height: 56px;
+    text-align: center;
+    /* font-size: 55px; */
+  }
+
+  .hack h1 {
+    font-size: 21vw;
+  }
+
+  .hack h2 {
+    font-size: 55px;
+  }
+
+  .desc {
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+  }
+
+  .right {
+    width: 100%;
+  }
+  .counter-button {
+    width: auto;
+  }
+
+  .mintbtn {
+    font-size: 4vw;
+  }
+}

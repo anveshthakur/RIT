@@ -9,9 +9,9 @@ const Header = () => {
   return (
     <nav className="main-navbar">
       <div className="logos">
-        <img src={vector}></img>
+        <img className="vector " src={vector}></img>
         <Link to="/" className="logo">
-          <img src={nfthing} alt="Nfthing" />
+          <img className="nfthing " src={nfthing} alt="Nfthing" />
         </Link>
       </div>
       <div className="dropdown">

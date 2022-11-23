@@ -4,7 +4,7 @@
 }
 
 .main-navbar {
-  margin-top: 4%;
+  margin-top: 3%;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -71,4 +71,31 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 2.76vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .logos .vector {
+    width: 5vw;
+    margin-right: 5px;
+  }
+
+  .nfthing {
+    width: 25vw;
+  }
+
+  .logos {
+    margin: 2vw;
+    /* width: 16%; */
+  }
+  .dropdown {
+    display: none;
+  }
+  .main-navbar .button {
+    border: 1pt solid #0000;
+  }
+  .main-navbar .button button {
+    width: auto;
+    height: auto;
+    font-size: 13px;
+  }
 }
