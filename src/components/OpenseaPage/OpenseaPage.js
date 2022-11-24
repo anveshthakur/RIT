@@ -36,31 +36,21 @@ const OpenseaPage = () => {
           <h1>CONGRATULATIONS!</h1>
         </div>
         <div className="info">
-          {
-            token 
-            ? 
-            <h2>
-              YOU HAVE SUCCESSFULY MINTED A UNIQUELY GENERATED NFT THROUGH OUR
-              MINTER.
-            </h2>
-            :
             <h2>
               YOU HAVE NOT MINTED A TOKEN WITH THIS ADDRESS. CHECK THE NFT COLLECTION 
             </h2>
-          }
         </div>
         <div className="socials1">
           <div>
             <img src={opensea} alt="opensea"></img>
           </div>
           <div>
-              <a href={token ? `${openseadef}/${contractAddress}/${token}` : "https://opensea.io/collection/rit-hackathon"}>
+              <a href={`${openseadef}/${contractAddress}/${token}`}>
                 VIEW ON OPENSEA
               </a>
           </div>
         </div>
       </div>
-
       <div class="dots_lines desktop">
         <div
           class="sq"

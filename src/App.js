@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import OwnerMinter from "./components/OwnerMinter/OwnerMinter";
-import MainPage from "./components/MainPage/MainPage";
 import { useAddress, useContract, useMetamask } from "@thirdweb-dev/react";
 import { TestPage } from "./components/TestPage/TestPage";
 import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
@@ -45,13 +44,10 @@ function App() {
   return (
     <Routes>
       <Route path="/ownerMint" element={<OwnerMinter claimNft={claimNft} />} />
-      <Route path="/" element={<MainPage claimNft={claimNft} />} />
       <Route
-        path="/test"
+        path="/"
         element={balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} />}
       />
-      <Route path="/openSea" element={<OpenseaPage />} />
-      <Route path="/mobile" element={<ChromePage />} />
     </Routes>
   );
 }
