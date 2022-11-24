@@ -7,8 +7,8 @@ import { AiOutlineDown } from "react-icons/ai";
 import { ethers } from "ethers";
 import polygon from "../../logos/polygon.png";
 
-const Header = ({ connectWithMetamask, address }) => {
-  const [error, setError] = useState(false);
+const Header = ({ connectWithMetamask, address, errLoad }) => {
+
   async function changeNetwork(params) {
     const chainId = 137;
     if (window.ethereum.networkVersion !== chainId) {
@@ -68,7 +68,7 @@ const Header = ({ connectWithMetamask, address }) => {
     <nav className="navbar">
       <div
         className="page-error"
-        style={{ visibility: error ? "visible" : "hidden" }}
+        style={{ visibility: errLoad ? "visible" : "hidden" }}
       >
         <h1>PLEASE CONNECT TO POLYGON NETWORK</h1>
         <button>
