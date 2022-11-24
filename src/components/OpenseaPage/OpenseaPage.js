@@ -25,11 +25,6 @@ const OpenseaPage = () => {
   }, [address]);
 
   return (
-    // <div>
-    //   {
-    //     token && `${openseadef}/${contractAddress}/${token}`
-    //   }
-    // </div>
     <>
       <Header connectWithMetamask={metaMaskConnect} address={address} />
       <div className="main1">
@@ -41,19 +36,27 @@ const OpenseaPage = () => {
           <h1>CONGRATULATIONS!</h1>
         </div>
         <div className="info">
-          <h2>
-            YOU HAVE SUCCESSFULY MINTED A UNIQUELY GENERATED NFT THROUGH OUR
-            MINTER.
-          </h2>
+          {
+            token 
+            ? 
+            <h2>
+              YOU HAVE SUCCESSFULY MINTED A UNIQUELY GENERATED NFT THROUGH OUR
+              MINTER.
+            </h2>
+            :
+            <h2>
+              YOU HAVE NOT MINTED A TOKEN WITH THIS ADDRESS. CHECK THE NFT COLLECTION 
+            </h2>
+          }
         </div>
         <div className="socials1">
           <div>
             <img src={opensea} alt="opensea"></img>
           </div>
           <div>
-            <a href="{openseadef}/${contractAddress}/${token}">
-              VIEW ON OPENSEA
-            </a>
+              <a href={token ? `${openseadef}/${contractAddress}/${token}` : "https://opensea.io/collection/rit-hackathon"}>
+                VIEW ON OPENSEA
+              </a>
           </div>
         </div>
       </div>

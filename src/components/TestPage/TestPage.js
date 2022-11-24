@@ -44,13 +44,13 @@ export const TestPage = ({ claimNft }) => {
           <div className="form-content">
             {/* dont need + - in this */}
             <div className="counter-button">
-              <AiOutlineMinus size={"20px"} onClick={amountHandlerMinus} />
+              {/* <AiOutlineMinus size={"20px"} onClick={amountHandlerMinus} /> */}
             </div>
             <div className="count">
-              <h2>{amount}</h2>
+              <h2>1</h2>
             </div>
             <div className="counter-button">
-              <AiOutlinePlus size={"20px"} onClick={amountHandlerPlus} />
+              {/* <AiOutlinePlus size={"20px"} onClick={amountHandlerPlus} /> */}
             </div>
             <div
               className="counter"
