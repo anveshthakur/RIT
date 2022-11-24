@@ -7,6 +7,7 @@ import { TestPage } from "./components/TestPage/TestPage";
 import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
 import { contract_balanceOf } from "./components/Blockchain/opensea";
 import { useEffect, useState } from "react";
+import ChromePage from "./components/ChromePage/ChromePage";
 
 function App() {
   const [balance, setBalance] = useState();
@@ -50,6 +51,7 @@ function App() {
         element={balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} />}
       />
       <Route path="/openSea" element={<OpenseaPage />} />
+      <Route path="/mobile" element={<ChromePage />} />
     </Routes>
   );
 }
