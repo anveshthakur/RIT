@@ -1,0 +1,98 @@
+.chrome-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 90vh;
+}
+
+.chrome-header {
+  align-items: center;
+}
+
+.chrome-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin-top: 20%;
+}
+
+.chrome-wel {
+  font-family: "PP NeueBit";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 5vw;
+  text-align: left;
+  /* margin-left: 20px; */
+  /* line-height: 51px; */
+  letter-spacing: -0.02em;
+}
+
+.chrome-wel h1 {
+  margin: 0;
+}
+
+.chrome-desc {
+  font-family: "N27";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 3.2vw;
+  margin-bottom: 2vh;
+  /* line-height: 14px; */
+}
+
+.copy-field {
+  display: flex;
+  align-items: center;
+  height: 6.5vh;
+  border: 1px solid black;
+  transform: skew(-25deg);
+}
+
+.copy-field h4 {
+  margin: 15px;
+  transform: skew(25deg);
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.copy-button {
+  background-color: black;
+  height: 90%;
+  /* width: 60%; */
+  margin-right: 4px;
+  color: white;
+  align-content: center;
+  cursor: pointer;
+}
+
+.copy-button h4 {
+  margin: 15px;
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.metamask {
+  border: 1px solid black;
+  transform: skew(-20deg);
+  width: 40%;
+  height: 5%;
+  /* align-items: center; */
+  text-align: center;
+}
+
+.metamask h2 {
+  transform: skew(25deg);
+  font-family: "N27";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
