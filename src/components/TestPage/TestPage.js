@@ -2,11 +2,17 @@ import React from "react";
 import Header from "../header/Header";
 import "./TestPage.css";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useAddress, useMetamask } from "@thirdweb-dev/react";
 
-export const TestPage = () => {
+export const TestPage = ({claimNft}) => {
+
+  const connectWithMetamask = useMetamask();
+  const address = useAddress();
+  
   return (
     <>
-      <Header />
+      <Header connectWithMetamask={connectWithMetamask} address = {address} />
+      
       <div className="frame">
         <div className="left">
           <div className="top">
@@ -24,6 +30,7 @@ export const TestPage = () => {
         </div>
         <div className="right">
           <div className="form-content">
+            {/* dont need + - in this */}
             <div className="counter-button">
               <AiOutlineMinus />
             </div>
@@ -34,7 +41,8 @@ export const TestPage = () => {
               <AiOutlinePlus />
             </div>
             <div className="counter">
-              <h3 className="mintbtn">MINT NOW</h3>
+              {/* disable address button if address is null or undefined */}
+              <h3 className="mintbtn" onClick={() => claimNft(address)}>MINT NOW</h3> 
             </div>
           </div>
         </div>

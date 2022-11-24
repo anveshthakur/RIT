@@ -1,23 +1,17 @@
 import "./App.css";
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import OwnerMinter from "./components/OwnerMinter/OwnerMinter";
 import MainPage from "./components/MainPage/MainPage";
-import { useContract } from "@thirdweb-dev/react";
+import { useAddress, useContract } from "@thirdweb-dev/react";
 import { TestPage } from "./components/TestPage/TestPage";
+import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
 
 function App() {
-  const OPEN_SEA = "https://opensea.io/collection/rit-hackathon";
+
   const { contract } = useContract(
     process.env.REACT_APP_CONTRACT_ADDRESS,
     "nft-drop"
   );
-
-  useEffect(() => {
-    console.log(
-      `I know front-end is bad 😿, You can go to the NFT collection from here 👉 ${OPEN_SEA}`
-    );
-  }, []);
 
   const claimNft = async (address) => {
     try {
@@ -26,9 +20,6 @@ function App() {
       console.log(tx[0].receipt.transactionHash);
       alert("Minting Complete!");
     } catch (error) {
-      alert(
-        "Are you allowed to mint NFTs? / Are You trying to mint more than 1 NFT?"
-      );
       console.log(error);
     }
   };
@@ -37,7 +28,8 @@ function App() {
     <Routes>
       <Route path="/ownerMint" element={<OwnerMinter claimNft={claimNft} />} />
       <Route path="/" element={<MainPage claimNft={claimNft} />} />
-      <Route path="/test" element={<TestPage />} />
+      <Route path="/opensea" element={ <OpenseaPage token = {1} /> } />
+      <Route path="/test" element={ <TestPage claimNft={claimNft} />} />
     </Routes>
   );
 }
