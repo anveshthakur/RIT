@@ -81,7 +81,15 @@
 }
 
 .right {
+  display: flex;
+  flex-direction: column;
   width: 40%;
+  margin: 0;
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
 }
 
 .form-content {
@@ -89,11 +97,11 @@
   justify-content: space-around;
   align-items: center;
   width: 75%;
-  height: 64px;
-  margin: auto;
+  height: 8vh;
+  margin: 0;
   border: 1px solid black;
   transform: skew(-25deg);
-
+  margin-bottom: 1.5%;
   /* margin-top: 4.1vh; */
 }
 
@@ -126,7 +134,7 @@
   font-weight: 400;
   font-size: 1vw;
   line-height: 29px;
-  color: white;
+  color: #ffff;
 }
 
 @media only screen and (max-width: 600px) {
@@ -173,19 +181,22 @@
   }
 
   .desc {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 14px;
     text-align: center;
   }
 
   .right {
+    align-items: center;
     width: 100%;
   }
+
   .counter-button {
     width: auto;
   }
 
   .mintbtn {
+    margin-top: 7%;
     font-size: 4vw;
   }
 }

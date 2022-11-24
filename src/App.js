@@ -9,23 +9,21 @@ import { contract_balanceOf } from "./components/Blockchain/opensea";
 import { useEffect, useState } from "react";
 
 function App() {
-
   const [balance, setBalance] = useState();
   const metaMaskConnect = useMetamask();
   const address = useAddress("0x");
 
   useEffect(() => {
     metaMaskConnect();
-  }, [])
-  
+  }, []);
+
   useEffect(() => {
-    async function getBalance(){
-      address && 
-      await contract_balanceOf(address)
-        .then(res => setBalance(res));
+    async function getBalance() {
+      address &&
+        (await contract_balanceOf(address).then((res) => setBalance(res)));
     }
     getBalance();
-  }, [address])
+  }, [address]);
 
   const { contract } = useContract(
     process.env.REACT_APP_CONTRACT_ADDRESS,
@@ -47,7 +45,11 @@ function App() {
     <Routes>
       <Route path="/ownerMint" element={<OwnerMinter claimNft={claimNft} />} />
       <Route path="/" element={<MainPage claimNft={claimNft} />} />
-      <Route path="/test" element={ balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} /> } />
+      <Route
+        path="/test"
+        element={balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} />}
+      />
+      <Route path="/openSea" element={<OpenseaPage />} />
     </Routes>
   );
 }
