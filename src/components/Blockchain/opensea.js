@@ -8,6 +8,7 @@ export async function tokensOfOwner(address){
         abi,
         new ethers.providers.Web3Provider(window.ethereum)
     )
+    console.log(address);
     let ts = (await contract.totalSupply()).toNumber();
     for (let i = 0; i < ts; i++) {
         let tokenOwner = await contract.ownerOf(i);
@@ -18,7 +19,6 @@ export async function tokensOfOwner(address){
     }
 }
 
-
 export async function contract_balanceOf(address){
     const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
     const contract = new ethers.Contract(
@@ -26,5 +26,5 @@ export async function contract_balanceOf(address){
         abi,
         new ethers.providers.Web3Provider(window.ethereum)
     )
-    return (await contract.balanceOf(address));
+    return ((await contract.balanceOf(address)).toNumber());
 }
