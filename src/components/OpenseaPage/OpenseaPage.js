@@ -4,7 +4,7 @@ import { tokensOfOwner } from '../Blockchain/opensea'
 
 const OpenseaPage = () => {
   
-  let contractAddress = ""
+  let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic"
   let address = useAddress();
   let metaMaskConnect = useMetamask();
