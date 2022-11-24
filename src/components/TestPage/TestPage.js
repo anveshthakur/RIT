@@ -7,16 +7,16 @@ export const TestPage = ({ claimNft, loading }) => {
   
   const connectWithMetamask = useMetamask();
   const address = useAddress();
-  
+
   const [errLoad, setErrLoad] = useState(false);
 
   const checkAndMint = async() => {
     const chainId = 137;
-    if (window.ethereum.networkVersion !== chainId) {
+    if (window.ethereum.networkVersion != chainId) {
       setErrLoad(true);
     }
     else{
-      await claimNft(address);
+      await claimNft(address)
     }
   }
 

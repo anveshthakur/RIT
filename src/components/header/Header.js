@@ -11,7 +11,7 @@ const Header = ({ connectWithMetamask, address, errLoad }) => {
 
   async function changeNetwork(params) {
     const chainId = 137;
-    if (window.ethereum.networkVersion !== chainId) {
+    if (window.ethereum.networkVersion != chainId) {
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
@@ -50,20 +50,6 @@ const Header = ({ connectWithMetamask, address, errLoad }) => {
     changeNetwork();
   }, []);
 
-  const switchNetwork = async () => {
-    const chainId = 137;
-    if (window.ethereum.networkVersion !== chainId) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: ethers.utils.hexValue(chainId) }],
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   return (
     <nav className="navbar">
       <div
@@ -71,7 +57,7 @@ const Header = ({ connectWithMetamask, address, errLoad }) => {
         style={{ visibility: errLoad ? "visible" : "hidden" }}
       >
         <h1>PLEASE CONNECT TO POLYGON NETWORK</h1>
-        <button>
+        <button onClick={changeNetwork}>
           <img src={polygon}></img>
         </button>
       </div>
