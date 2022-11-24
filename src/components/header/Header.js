@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import nfthing from "../../logos/Group 1.png";
 import vector from "../../logos/Vector.png";
 import { Link } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
 import { ethers } from "ethers";
+import polygon from "../../logos/polygon.png";
 
 const Header = ({ connectWithMetamask, address }) => {
+  const [error, setError] = useState(false);
   async function changeNetwork(params) {
     const chainId = 137;
     if (window.ethereum.networkVersion !== chainId) {
@@ -63,20 +65,31 @@ const Header = ({ connectWithMetamask, address }) => {
   };
 
   return (
-    <nav className="main-navbar">
-      <div className="logos">
-        <img className="vector " src={vector}></img>
-        <Link to="/" className="logo">
-          <img className="nfthing " src={nfthing} alt="Nfthing" />
-        </Link>
-      </div>
-
-      <div className="button">
-        <button onClick={connectWithMetamask}>
-          {address
-            ? address.slice(0, 4) + "...." + address.slice(-4)
-            : "Connect Wallet"}
+    <nav className="navbar">
+      <div
+        className="page-error"
+        style={{ visibility: error ? "visible" : "hidden" }}
+      >
+        <h1>PLEASE CONNECT TO POLYGON NETWORK</h1>
+        <button>
+          <img src={polygon}></img>
         </button>
+      </div>
+      <div className="main-navbar">
+        <div className="logos">
+          <img className="vector " src={vector}></img>
+          <Link to="/" className="logo">
+            <img className="nfthing " src={nfthing} alt="Nfthing" />
+          </Link>
+        </div>
+
+        <div className="button">
+          <button onClick={connectWithMetamask}>
+            {address
+              ? address.slice(0, 4) + "...." + address.slice(-4)
+              : "Connect Wallet"}
+          </button>
+        </div>
       </div>
     </nav>
   );

@@ -3,13 +3,41 @@
   src: url("../assets/fonts/N27-Regular.otf");
 }
 
+.page-error {
+  display: flex;
+  /* visibility: hidden; */
+  background-color: black;
+  height: 35px;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+}
+
+.page-error h1 {
+  margin-right: 10px;
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.page-error button {
+  align-items: center;
+  width: 70px;
+  height: 30px;
+  background-color: #ffff;
+  cursor: pointer;
+}
+
 .main-navbar {
-  margin-top: 3%;
+  margin-top: 1%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 5%;
+  margin-bottom: 4%;
 }
 
 /* .main-navbar .logo {
