@@ -1,30 +1,16 @@
 import React from "react";
 import Header from "../header/Header";
 import "./TestPage.css";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { useState } from "react";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 
-export const TestPage = ({ claimNft }) => {
+export const TestPage = ({ claimNft, loading }) => {
+  
   const connectWithMetamask = useMetamask();
   const address = useAddress();
-  const [amount, setAmount] = useState(0);
-  const amountHandlerPlus = () => {
-    if (amount == 0) {
-      setAmount(1);
-    }
-  };
-
-  const amountHandlerMinus = () => {
-    if (amount == 1) {
-      setAmount(0);
-    }
-  };
 
   return (
     <>
       <Header connectWithMetamask={connectWithMetamask} address={address} />
-
       <div className="frame">
         <div className="left">
           <div className="top">
@@ -59,7 +45,7 @@ export const TestPage = ({ claimNft }) => {
               {/* disable address button if address is null or undefined */}
               {address ? (
                 <h3 className="mintbtn" onClick={() => claimNft(address)}>
-                  MINT NOW
+                  {loading ? "Loading" : "MINT NOW"}
                 </h3>
               ) : (
                 <h3 className="mintbtn" onClick={() => claimNft(address)}>
@@ -67,10 +53,6 @@ export const TestPage = ({ claimNft }) => {
                 </h3>
               )}
             </div>
-          </div>
-
-          <div style={{ display: amount == 1 ? "block" : "none" }}>
-            ■ MAXIMUM MINT LIMIT REACHED
           </div>
         </div>
       </div>
