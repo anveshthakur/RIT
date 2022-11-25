@@ -240,7 +240,7 @@ const OpenseaPage = () => {
         </div>
       </div>
     </>
-  : <h1>loading</h1>);
+  : <div className="loader"></div>);
 
   // LOADER ^
 };

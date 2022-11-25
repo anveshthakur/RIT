@@ -114,6 +114,30 @@ body {
   color: #151515;
 }
 
+.loader {
+  border: 5px solid #ffffff; /* Light grey */
+  border-top: 5px solid #1c1d1d; /* Blue */
+  border-radius: 50%;
+
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  align-items: center;
+  width: 9.18vh;
+  height: 9.18vh;
+
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .main1 {
     left: 7%;

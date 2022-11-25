@@ -6,7 +6,6 @@ import { contract_getWhiteListed } from "../Blockchain/opensea";
 import { useNavigate } from "react-router-dom";
 
 export const TestPage = ({ claimNft, loading }) => {
-  
   const connectWithMetamask = useMetamask();
   const address = useAddress();
   const navigate = useNavigate();
@@ -14,35 +13,36 @@ export const TestPage = ({ claimNft, loading }) => {
   const [errLoad, setErrLoad] = useState(false);
   const [whiteListed, setWhiteListed] = useState(false);
 
-  useEffect(() => { 
-    async function get_allowed(){
-      await contract_getWhiteListed(address)
-        .then(res => {
-          (address && !res) && navigate("/opensea")
-          setWhiteListed(res)
-        }) 
+  useEffect(() => {
+    async function get_allowed() {
+      await contract_getWhiteListed(address).then((res) => {
+        address && !res && navigate("/opensea");
+        setWhiteListed(res);
+      });
     }
     console.log(address);
     get_allowed();
-  }, [address])
-  
+  }, [address]);
 
-  const checkAndMint = async() => {
+  const checkAndMint = async () => {
     const chainId = 137;
-    
-    !whiteListed && navigate("/opensea") 
-    
+
+    !whiteListed && navigate("/opensea");
+
     if (window.ethereum.networkVersion != chainId) {
       setErrLoad(true);
+    } else {
+      await claimNft(address);
     }
-    else{
-      await claimNft(address)
-    }
-  }
+  };
 
   return (
     <>
-      <Header connectWithMetamask={connectWithMetamask} address={address} errLoad={errLoad} />   
+      <Header
+        connectWithMetamask={connectWithMetamask}
+        address={address}
+        errLoad={errLoad}
+      />
       <div className="frame">
         <div className="left">
           <div className="top">
@@ -72,17 +72,21 @@ export const TestPage = ({ claimNft, loading }) => {
             </div>
             <div
               className="counter"
-              style={{ backgroundColor: (address && whiteListed) ? "black" : "#D6D6D6" }}
+              style={{
+                backgroundColor: address && whiteListed ? "black" : "#D6D6D6",
+              }}
             >
               {/* disable address button if address is null or undefined */}
               {address && whiteListed ? (
-                <h3 className="mintbtn" onClick={() => checkAndMint(address)}>
-                  {loading ? "Loading" : "MINT NOW"}
-                </h3>
+                loading ? (
+                  <div className="loader1"></div>
+                ) : (
+                  <h3 className="mintbtn" onClick={() => checkAndMint(address)}>
+                    Mint now
+                  </h3>
+                )
               ) : (
-                <h3 className="mintbtn">
-                  Unavailable
-                </h3>
+                <h3 className="mintbtn">Unavailable</h3>
               )}
             </div>
           </div>
