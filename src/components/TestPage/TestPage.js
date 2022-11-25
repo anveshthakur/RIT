@@ -3,11 +3,13 @@ import Header from "../header/Header";
 import "./TestPage.css";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import { contract_getWhiteListed } from "../Blockchain/opensea";
+import { useNavigate } from "react-router-dom";
 
 export const TestPage = ({ claimNft, loading }) => {
   
   const connectWithMetamask = useMetamask();
   const address = useAddress();
+  const navigate = useNavigate();
 
   const [errLoad, setErrLoad] = useState(false);
   const [whiteListed, setWhiteListed] = useState(false);
@@ -15,14 +17,21 @@ export const TestPage = ({ claimNft, loading }) => {
   useEffect(() => { 
     async function get_allowed(){
       await contract_getWhiteListed(address)
-        .then(res => setWhiteListed(res)) 
+        .then(res => {
+          (address && !res) && navigate("/opensea")
+          setWhiteListed(res)
+        }) 
     }
+    console.log(address);
     get_allowed();
   }, [address])
   
 
   const checkAndMint = async() => {
     const chainId = 137;
+    
+    !whiteListed && navigate("/opensea") 
+    
     if (window.ethereum.networkVersion != chainId) {
       setErrLoad(true);
     }

@@ -1,7 +1,6 @@
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
-import { BsTwitter, BsInstagram } from "react-icons/bs";
 import "./OpenseaPage.css";
 import { tokensOfOwner } from "../Blockchain/opensea";
 import opensea from "../../logos/opensea.png";
@@ -33,7 +32,10 @@ const OpenseaPage = () => {
     !loading ? 
     <>
       <Header connectWithMetamask={metaMaskConnect} address={address} />
-      <div className="main1">
+      
+      {
+        token ? (
+          <div className="main1">
         <div className="frame-bar">
           <div className="square"></div>
           <h3>MINT SUCCESSFUL </h3>
@@ -43,7 +45,7 @@ const OpenseaPage = () => {
         </div>
         <div className="info">
             <h2>
-              YOU HAVE NOT MINTED A TOKEN WITH THIS ADDRESS. CHECK THE NFT COLLECTION 
+              YOU HAVE MINTED A TOKEN WITH THIS ADDRESS. CHECK THE NFT COLLECTION 
             </h2>
         </div>
         <div className="socials1">
@@ -57,6 +59,36 @@ const OpenseaPage = () => {
           </div>
         </div>
       </div>
+        ) 
+        
+        : (
+          <div className="main1">
+        <div className="frame-bar">
+          <div className="square"></div>
+          <h3>NOT WHITELISTED </h3>
+        </div>
+        <div className="congo">
+          <h1>VISIT OUR STALL!</h1>
+        </div>
+        <div className="info">
+            <h2>
+              VISIT OUR STALL TO CLAIM YOUR NFT IN PERSON. CHECK THE NFT COLLECTION 
+            </h2>
+        </div>
+        <div className="socials1">
+          <div>
+            <img src={opensea} alt="opensea"></img>
+          </div>
+          <div>
+              <a href={`https://opensea.io/collection/rit-hackathon`}>
+                VIEW ON OPENSEA
+              </a>
+          </div>
+        </div>
+      </div>
+        )
+      }    
+      
       <div class="dots_lines desktop">
         <div
           class="sq"
