@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
 import "./TestPage.css";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
+import { contract_getWhiteListed } from "../Blockchain/opensea";
 
 export const TestPage = ({ claimNft, loading }) => {
   
@@ -9,6 +10,16 @@ export const TestPage = ({ claimNft, loading }) => {
   const address = useAddress();
 
   const [errLoad, setErrLoad] = useState(false);
+  const [whiteListed, setWhiteListed] = useState(false);
+
+  useEffect(() => { 
+    async function get_allowed(){
+      await contract_getWhiteListed(address)
+        .then(res => setWhiteListed(res)) 
+    }
+    get_allowed();
+  }, [address])
+  
 
   const checkAndMint = async() => {
     const chainId = 137;
@@ -52,10 +63,10 @@ export const TestPage = ({ claimNft, loading }) => {
             </div>
             <div
               className="counter"
-              style={{ backgroundColor: address ? "black" : "#D6D6D6" }}
+              style={{ backgroundColor: (address && whiteListed) ? "black" : "#D6D6D6" }}
             >
               {/* disable address button if address is null or undefined */}
-              {address ? (
+              {address && whiteListed ? (
                 <h3 className="mintbtn" onClick={() => checkAndMint(address)}>
                   {loading ? "Loading" : "MINT NOW"}
                 </h3>
