@@ -10,12 +10,42 @@ import { useEffect, useState } from "react";
 import ChromePage from "./components/ChromePage/ChromePage";
 
 function App() {
-  
+  const [metabrowser, setMetabrowser] = useState(false);
+  const [isChrome, setIsChrome] = useState(false);
   const [balance, setBalance] = useState();
   const [loading, setLoading] = useState(false);
-  
+  const [matches, setMatches] = useState(false);
   const metaMaskConnect = useMetamask();
   const address = useAddress("0x");
+
+  useEffect(() => {
+    // window
+    //   .matchMedia("(max-width: 500px)")
+    //   .addEventListener("change", (e) => setMatches(e.matches));
+    // console.log(matches)
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      return setMatches(true);
+    } else {
+      setMatches(false);
+    }
+  });
+
+  useEffect(() => {
+    if (typeof window.ethereum !== "undefined") {
+      setMetabrowser(true);
+    }
+    console.log(metabrowser);
+  });
+
+  useEffect(() => {
+    if (matches && !metabrowser) {
+      setIsChrome(true);
+    }
+  });
 
   useEffect(() => {
     metaMaskConnect();
@@ -24,9 +54,8 @@ function App() {
   useEffect(() => {
     async function getBalance() {
       address &&
-        (await contract_balanceOf(address)
-        .then(res => {
-          setBalance(res)
+        (await contract_balanceOf(address).then((res) => {
+          setBalance(res);
           setLoading(false);
         }));
     }
@@ -41,11 +70,10 @@ function App() {
   const claimNft = async (address) => {
     try {
       setLoading(true);
-      await contract.claimTo(address, 1)
-      .then(res => {
+      await contract.claimTo(address, 1).then((res) => {
         setLoading(false);
         console.log(res[0].receipt.transactionHash);
-      })
+      });
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -57,7 +85,17 @@ function App() {
       <Route path="/ownerMint" element={<OwnerMinter claimNft={claimNft} />} />
       <Route
         path="/"
-        element={balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} loading={loading} />}
+        element={
+          !isChrome ? (
+            balance ? (
+              <OpenseaPage />
+            ) : (
+              <TestPage claimNft={claimNft} loading={loading} />
+            )
+          ) : (
+            <ChromePage />
+          )
+        }
       />
       <Route path="/mobile" element={<ChromePage />} />
     </Routes>
