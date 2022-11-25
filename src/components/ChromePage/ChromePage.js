@@ -21,10 +21,10 @@ const ChromePage = () => {
     let result;
 
     try {
-      textarea = document.createElement("textarea");
+      textarea = document.getElementById("copy-text");
       textarea.setAttribute("readonly", true);
       textarea.setAttribute("contenteditable", true);
-      textarea.style.position = "fixed"; // prevent scroll from jumping to the bottom when focus is set.
+      // textarea.style.position = "fixed"; // prevent scroll from jumping to the bottom when focus is set.
       textarea.value = string;
 
       document.body.appendChild(textarea);
@@ -44,8 +44,6 @@ const ChromePage = () => {
     } catch (err) {
       console.error(err);
       result = null;
-    } finally {
-      document.body.removeChild(textarea);
     }
   }
 
@@ -66,10 +64,10 @@ const ChromePage = () => {
             </h3>
           </div>
           <div>
-            <div className="copy-field">
+            <div className="copy-field" id="copy-text">
               <h4>https://minter.nfthing.com</h4>
               <div
-                onClick={copyToClipboard("https://rit.nfthing.com/")}
+                // onClick={copyToClipboard("https://rit.nfthing.com/")}
                 className="copy-button"
               >
                 <h4>{copied ? "Copied" : "Copy link"}</h4>
@@ -78,7 +76,12 @@ const ChromePage = () => {
           </div>
         </div>
         <div className="metamask">
-          <h2>OPEN METAMASK</h2>
+          <a
+            className="deeplink"
+            href="https://metamask.app.link/dapp/rit.nfthing.com/"
+          >
+            OPEN METAMASK
+          </a>
         </div>
         <div className="chrome-socials">
           <h3>generating links</h3>
