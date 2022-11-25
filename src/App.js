@@ -44,7 +44,7 @@ function App() {
   });
 
   useEffect(() => {
-    metaMaskConnect()
+    !isChrome && metaMaskConnect()
     .then(res => window.location.reload);
   }, []);
 
