@@ -10,7 +10,10 @@ import { useEffect, useState } from "react";
 import ChromePage from "./components/ChromePage/ChromePage";
 
 function App() {
+  
   const [balance, setBalance] = useState();
+  const [loading, setLoading] = useState(false);
+  
   const metaMaskConnect = useMetamask();
   const address = useAddress("0x");
 
@@ -21,7 +24,11 @@ function App() {
   useEffect(() => {
     async function getBalance() {
       address &&
-        (await contract_balanceOf(address).then((res) => setBalance(res)));
+        (await contract_balanceOf(address)
+        .then(res => {
+          setBalance(res)
+          setLoading(false);
+        }));
     }
     getBalance();
   }, [address]);
@@ -33,11 +40,14 @@ function App() {
 
   const claimNft = async (address) => {
     try {
-      const tx = await contract.claimTo(address, 1); //address,  quantity
-      console.log(tx[0].receipt.blockHash);
-      console.log(tx[0].receipt.transactionHash);
-      alert("Minting Complete!");
+      setLoading(true);
+      await contract.claimTo(address, 1)
+      .then(res => {
+        setLoading(false);
+        console.log(res[0].receipt.transactionHash);
+      })
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -47,7 +57,7 @@ function App() {
       <Route path="/ownerMint" element={<OwnerMinter claimNft={claimNft} />} />
       <Route
         path="/"
-        element={balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} />}
+        element={balance ? <OpenseaPage /> : <TestPage claimNft={claimNft} loading={loading} />}
       />
       <Route path="/mobile" element={<ChromePage />} />
     </Routes>

@@ -7,11 +7,11 @@ import { AiOutlineDown } from "react-icons/ai";
 import { ethers } from "ethers";
 import polygon from "../../logos/polygon.png";
 
-const Header = ({ connectWithMetamask, address }) => {
-  const [error, setError] = useState(false);
+const Header = ({ connectWithMetamask, address, errLoad }) => {
+
   async function changeNetwork(params) {
     const chainId = 137;
-    if (window.ethereum.networkVersion !== chainId) {
+    if (window.ethereum.networkVersion != chainId) {
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
@@ -50,28 +50,14 @@ const Header = ({ connectWithMetamask, address }) => {
     changeNetwork();
   }, []);
 
-  const switchNetwork = async () => {
-    const chainId = 137;
-    if (window.ethereum.networkVersion !== chainId) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: ethers.utils.hexValue(chainId) }],
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   return (
     <nav className="navbar">
       <div
         className="page-error"
-        style={{ visibility: error ? "visible" : "hidden" }}
+        style={{ visibility: errLoad ? "visible" : "hidden" }}
       >
         <h1>PLEASE CONNECT TO POLYGON NETWORK</h1>
-        <button>
+        <button onClick={changeNetwork}>
           <img src={polygon}></img>
         </button>
       </div>

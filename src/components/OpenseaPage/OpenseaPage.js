@@ -14,17 +14,23 @@ const OpenseaPage = () => {
   let metaMaskConnect = useMetamask();
 
   const [token, setToken] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getToken() {
-      let tok = await tokensOfOwner(address);
-      setToken(tok);
+      await tokensOfOwner(address)
+      .then(res => {
+        setToken(res)
+        setLoading(false);
+      })
+      .catch(err => console.log(err));
       metaMaskConnect();
     }
     getToken();
   }, [address]);
 
   return (
+    !loading ? 
     <>
       <Header connectWithMetamask={metaMaskConnect} address={address} />
       <div className="main1">
@@ -202,7 +208,9 @@ const OpenseaPage = () => {
         </div>
       </div>
     </>
-  );
+  : <h1>loading</h1>);
+
+  // LOADER ^
 };
 
 export default OpenseaPage;
