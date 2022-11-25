@@ -48,7 +48,7 @@ function App() {
   });
 
   useEffect(() => {
-    metaMaskConnect();
+    !isChrome && metaMaskConnect();
   }, []);
 
   useEffect(() => {
