@@ -94,7 +94,7 @@
 
 .form-content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 75%;
   height: 8vh;
@@ -120,15 +120,16 @@
 }
 
 .counter {
-  transform: skew(25deg);
+  margin-right: 5px;
+  cursor: pointer;
   height: 90%;
   width: 40%;
   background-color: black;
-
   text-align: center;
 }
 
 .mintbtn {
+  transform: skew(25deg);
   font-family: "N27";
   font-style: normal;
   font-weight: 400;

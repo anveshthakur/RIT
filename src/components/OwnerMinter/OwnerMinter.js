@@ -1,12 +1,17 @@
 import React, { useRef, useState } from "react";
 import Html5QrcodePlugin from "./Html5QrcodePlugin.jsx";
 import Header from "../header/Header.js";
+import "./OwnerMinter.css";
 // import {QrReader}  from 'react-qr-reader';
 
 const OwnerMinter = ({ claimNft }) => {
+  const [email, setEmail] = useState("");
+  const [walletAddress, setwalletAddress] = useState(null);
+  const [slno, setSlno] = useState(null);
   const [Scan, setScan] = useState(false);
   const [result, setResult] = useState("");
   const address = useRef("");
+  const url = "https://api.nfthing.com/Ownermints";
 
   const previewStyle = {
     height: "240px",
@@ -17,46 +22,62 @@ const OwnerMinter = ({ claimNft }) => {
     console.log(decodedText);
   };
 
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    if (id == "email") {
+      setEmail(value);
+    }
+    if (id == "slno") {
+      setSlno(value);
+    }
+    if (id == "address") {
+      setwalletAddress(value);
+    }
+  };
+
+  const handlePull = () => {
+    const requestOptions = {
+      // mode: 'no-cors',
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        slno: slno,
+      }),
+    };
+
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => responses(data));
+  };
+  const responses = (data) => {
+    document.getElementById("address").value = data.walletAddress;
+  };
+
+
+
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <h1>Owner Mint</h1>
-    //     address: <input type="text" ref={address} />
-    //     <br />
-    //     <button onClick={() => claimNft(address.current.value)}>Send To!</button>
-    //     <br />
-    //     <button onClick={() => setScan(prev => !prev)}>
-    //       Scan
-    //     </button>
-
-    //     {/* {Scan &&
-    //       <div style={previewStyle}>
-    //       <QrReader
-    //       delay={300}
-    //       onResult={(result, error) => {
-    //         !!result && console.log(result?.text);
-    //         !!error && console.log(error);
-    //     }}
-    //     />
-    //     </div>
-    //     }  */}
-
-    //       <Html5QrcodePlugin
-    //             fps={10}
-    //             qrbox={250}
-    //             disableFlip={false}
-    //             qrCodeSuccessCallback={onNewScanResult}/>
-
-    //   </header>
-    // </div>
     <>
       <Header />
-      <div>
-        <input type="text" placeholder="Enter Your email address"></input>
-        <span></span>
-      </div>
-      <div>
-        <input type="text" placeeholder="enter your wallet address"></input>
+      <div className="owner-main">
+        <div className="owner-frame">
+          <input
+            id="email"
+            className="own-email"
+            type="text"
+            placeholder="Enter Your email address"
+          ></input>
+          <br />
+          <span className="own-emailerr" onChange={(e) => handleInputChange(e)}>Enter a right email</span>
+        </div>
+        <div className="scanner">
+          <input id="slno" className="walletId" placeholder="Sl No" onChange={(e) => handleInputChange(e)}></input>
+        </div>
+        <button className="pull">Pull wallet address</button>
+        <input id="address" placeholder="Wallet address" onChange={(e) => handleInputChange(e)}></input>
+        <div>
+          <input type="submit" className="o-mintbtn" placeholder="Mint"></input>
+        </div>
       </div>
     </>
   );
