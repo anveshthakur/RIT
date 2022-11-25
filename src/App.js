@@ -14,14 +14,11 @@ function App() {
   const [balance, setBalance] = useState();
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState(false);
+  
   const metaMaskConnect = useMetamask();
   const address = useAddress("0x");
 
   useEffect(() => {
-    // window
-    //   .matchMedia("(max-width: 500px)")
-    //   .addEventListener("change", (e) => setMatches(e.matches));
-    // console.log(matches)
     if (
       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
@@ -47,7 +44,8 @@ function App() {
   });
 
   useEffect(() => {
-    !isChrome && metaMaskConnect();
+    !isChrome && metaMaskConnect()
+    .then(res => window.location.reload);
   }, []);
 
   useEffect(() => {
@@ -97,6 +95,7 @@ function App() {
         }
       />
       <Route path="/mobile" element={<ChromePage />} />
+      <Route path="/opensea" element={<OpenseaPage /> } />
     </Routes>
   );
 }
