@@ -45,7 +45,7 @@ const OpenseaPage = () => {
         </div>
         <div className="info">
             <h2>
-              YOU HAVE MINTED A TOKEN WITH THIS ADDRESS. CHECK THE NFT COLLECTION 
+              YOU HAVE MINTED A TOKEN WITH THIS ADDRESS. CHECK YOUR NFT OVER HERE. 
             </h2>
         </div>
         <div className="socials1">
@@ -89,25 +89,25 @@ const OpenseaPage = () => {
         )
       }    
       
-      <div class="dots_lines desktop">
+      <div className="dots_lines desktop">
         <div
-          class="sq"
+          className="sq"
           style={{ position: "absolute", left: "8.3vw", top: "33.5vh" }}
         ></div>
         <div
-          class="sq"
+          className="sq"
           style={{ position: "absolute", left: "42.5vw", top: "18.8vh" }}
         ></div>
         <div
-          class="sq"
+          className="sq"
           style={{ position: "absolute", left: "83.6vw", top: "28.5vh" }}
         ></div>
         <div
-          class="sq"
+          className="sq"
           style={{ position: "absolute", left: "92vw", top: "73.3vh" }}
         ></div>
         <div
-          class="sq"
+          className="sq"
           style={{
             position: "absolute",
             left: "92vw",
@@ -116,7 +116,7 @@ const OpenseaPage = () => {
           }}
         ></div>
         <div
-          class="sq"
+          className="sq"
           style={{
             position: "absolute",
             left: "19.8vw",
@@ -127,7 +127,7 @@ const OpenseaPage = () => {
           }}
         ></div>
         <div
-          class="sq"
+          className="sq"
           style={{
             position: "absolute",
             right: "15vw",
@@ -138,7 +138,7 @@ const OpenseaPage = () => {
         ></div>
 
         <div
-          class="4square"
+          className="4square"
           style={{
             display: "block",
             position: "absolute",
@@ -147,23 +147,23 @@ const OpenseaPage = () => {
           }}
         >
           <div style={{ display: "flex" }}>
-            <div class="sq3" style={{ position: "unset" }}></div>
+            <div className="sq3" style={{ position: "unset" }}></div>
             <div
-              class="sq3"
+              className="sq3"
               style={{ marginLeft: "3px", position: "unset" }}
             ></div>
           </div>
 
           <div style={{ display: "flex", marginTop: "3px" }}>
-            <div class="sq3" style={{ position: "unset" }}></div>
+            <div className="sq3" style={{ position: "unset" }}></div>
             <div
-              class="sq3"
+              className="sq3"
               style={{ marginLeft: "3px", position: "unset" }}
             ></div>
           </div>
         </div>
         <div
-          class="4square"
+          className="4square"
           style={{
             display: "block",
             position: "absolute",
@@ -172,23 +172,23 @@ const OpenseaPage = () => {
           }}
         >
           <div style={{ display: "flex" }}>
-            <div class="sq3" style={{ position: "unset" }}></div>
+            <div className="sq3" style={{ position: "unset" }}></div>
             <div
-              class="sq3"
+              className="sq3"
               style={{ marginLeft: "3px", position: "unset" }}
             ></div>
           </div>
 
           <div style={{ display: "flex", marginTop: "3px" }}>
-            <div class="sq3" style={{ position: "unset" }}></div>
+            <div className="sq3" style={{ position: "unset" }}></div>
             <div
-              class="sq3"
+              className="sq3"
               style={{ marginLeft: "3px", position: "unset" }}
             ></div>
           </div>
         </div>
         <div
-          class="4square"
+          className="4square"
           style={{
             display: "block",
             position: "absolute",
@@ -197,23 +197,23 @@ const OpenseaPage = () => {
           }}
         >
           <div style={{ display: "flex" }}>
-            <div class="sq3" style={{ position: "unset" }}></div>
+            <div className="sq3" style={{ position: "unset" }}></div>
             <div
-              class="sq3"
+              className="sq3"
               style={{ marginLeft: "3px", position: "unset" }}
             ></div>
           </div>
 
           <div style={{ display: "flex", marginTop: "3px" }}>
-            <div class="sq3" style={{ position: "unset" }}></div>
+            <div className="sq3" style={{ position: "unset" }}></div>
             <div
-              class="sq3"
+              className="sq3"
               style={{ marginLeft: "3px", position: "unset" }}
             ></div>
           </div>
         </div>
         <div
-          class="linedot"
+          className="linedot"
           style={{
             position: "absolute",
             left: "47px",
@@ -221,12 +221,12 @@ const OpenseaPage = () => {
             transform: "rotate(90deg)",
           }}
         >
-          <div class="linethin"></div>
-          <div class="sq3" style={{ top: "-59px" }}></div>
-          <div class="sq3" style={{ top: "-71px", marginBottom: "12px" }}></div>
+          <div className="linethin"></div>
+          <div className="sq3" style={{ top: "-59px" }}></div>
+          <div className="sq3" style={{ top: "-71px", marginBottom: "12px" }}></div>
         </div>
         <div
-          class="linedot"
+          className="linedot"
           style={{
             position: "absolute",
             left: "73.9vw",
@@ -234,9 +234,9 @@ const OpenseaPage = () => {
             transform: "rotate(0deg)",
           }}
         >
-          <div class="linethin"></div>
-          <div class="sq3" style={{ top: "-59px" }}></div>
-          <div class="sq3" style={{ top: "-71px", marginBottom: "12px" }}></div>
+          <div className="linethin"></div>
+          <div className="sq3" style={{ top: "-59px" }}></div>
+          <div className="sq3" style={{ top: "-71px", marginBottom: "12px" }}></div>
         </div>
       </div>
     </>
