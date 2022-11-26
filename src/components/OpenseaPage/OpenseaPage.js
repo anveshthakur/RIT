@@ -32,7 +32,6 @@ const OpenseaPage = () => {
     !loading ? 
     <>
       <Header connectWithMetamask={metaMaskConnect} address={address} />
-      
       {
         token ? (
           <div className="main1">
@@ -80,7 +79,7 @@ const OpenseaPage = () => {
             <img src={opensea} alt="opensea"></img>
           </div>
           <div>
-              <a href={`https://opensea.io/collection/rit-hackathon`}>
+              <a href={`https://opensea.io/collection/crypto-legomen`}>
                 VIEW ON OPENSEA
               </a>
           </div>
