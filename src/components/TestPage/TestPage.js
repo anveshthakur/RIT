@@ -79,7 +79,11 @@ export const TestPage = ({ claimNft, loading }) => {
               {/* disable address button if address is null or undefined */}
               {address && whiteListed ? (
                 loading ? (
-                  <div className="loader1"></div>
+                  <div
+                    style={{ transform: "skew(25deg)", "margin-top": "0.7vh" }}
+                  >
+                    <div className="loader1"></div>
+                  </div>
                 ) : (
                   <h3 className="mintbtn" onClick={() => checkAndMint(address)}>
                     Mint now
