@@ -11,9 +11,9 @@ const OwnerMinter = ({ claimNft }) => {
   const [walletAddress, setwalletAddress] = useState(null);
   const [slno, setSlno] = useState(null);
 
-  // const url = "https://api.nfthing.com/onsite";
+  const url = "https://api.nfthing.com/owner";
   // const url = "http://localhost:5000/registerdata";
-  const url = "http://192.168.172.158:5000/owner";
+  // const url = "http://192.168.172.158:5000/owner";
 
   const handlePull = () => {
     const requestOptions = {
