@@ -62,16 +62,3 @@ input {
   border: 0.5px solid #151515;
   cursor: pointer;
 }
-
-.loader {
-  border: 5px solid #ffffff; /* Light grey */
-  border-top: 5px solid #1c1d1d; /* Blue */
-  border-radius: 50%;
-  margin-top: 10%;
-  align-items: center;
-  width: 9.18vh;
-  height: 9.18vh;
-  margin-top: 20%;
-  margin-bottom: 20%;
-  animation: spin 2s linear infinite;
-}

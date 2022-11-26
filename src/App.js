@@ -7,6 +7,8 @@ import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
 import { contract_balanceOf } from "./components/Blockchain/opensea";
 import { useEffect, useState } from "react";
 import ChromePage from "./components/ChromePage/ChromePage";
+import { ethers } from "ethers";
+import axios from "axios";
 
 function App() {
   const [metabrowser, setMetabrowser] = useState(false);
@@ -17,6 +19,9 @@ function App() {
   
   const metaMaskConnect = useMetamask();
   const address = useAddress("0x");
+  let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+  let openseadef = "https://opensea.io/assets/matic";
+
 
   useEffect(() => {
     if (
@@ -64,12 +69,23 @@ function App() {
     "nft-drop"
   );
 
+  const makeApiCall = async(tokenId) => {
+    const body = {
+      address : address,
+      tokenId : `${openseadef}/${contractAddress}/${tokenId}`
+    }  
+    console.log(body);
+    // axios.post("https://api.nfthing.com/", body);
+  }
+
   const claimNft = async (address) => {
     try {
       setLoading(true);
-      await contract.claimTo(address, 1).then((res) => {
+      await contract.claimTo(address, 1)
+      .then((res) => {
         setLoading(false);
-        console.log(res[0].receipt.transactionHash);
+        const tokenId = (res[0].receipt.logs[0].topics[3])
+        makeApiCall(parseInt(Number(tokenId)));
       });
     } catch (error) {
       setLoading(false);
