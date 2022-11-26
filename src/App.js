@@ -75,7 +75,9 @@ function App() {
       tokenId : `${openseadef}/${contractAddress}/${tokenId}`
     }  
     console.log(body);
-    // axios.post("https://api.nfthing.com/", body);
+    await axios.post("https://api.nfthing.com/successfulmint", body)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   }
 
   const claimNft = async (address) => {
