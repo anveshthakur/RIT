@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
 import "./TestPage.css";
+import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import { contract_balanceOf, contract_getWhiteListed } from "../Blockchain/opensea";
 import { useNavigate } from "react-router-dom";
@@ -92,6 +93,24 @@ export const TestPage = ({ claimNft, loading }) => {
               ) : (
                 <h3 className="mintbtn">Unavailable</h3>
               )}
+            </div>
+          </div>
+          <div className="socials">
+            <div class="gentext">
+              {" "}
+              //GENERATING <br></br> SOCIAL LINKS FROM INDEX
+            </div>
+            <h2>FOLLOW US ON</h2>
+            <div className="links">
+              <a href="https://twitter.com/NFThing_" target="_blank">
+                <BsTwitter className="icon" /> <p>TWITTER</p>
+              </a>
+              <a
+                href="https://instagram.com/nfthing_?igshid=YmMyMTA2M2Y="
+                target="_blank"
+              >
+                <BsInstagram className="icon" /> <p>INSTAGRAM</p>
+              </a>
             </div>
           </div>
         </div>
