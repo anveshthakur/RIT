@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "N27";
+  src: url("../assets/fonts/N27-Regular.otf");
+}
+
+.page-error {
+  display: flex;
+  /* visibility: hidden; */
+  background-color: black;
+  height: 35px;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+  color: #ffff;
+}
+
+.page-error h1 {
+  margin-right: 10px;
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.page-error button {
+  align-items: center;
+  width: 70px;
+  height: 30px;
+  background-color: #ffff;
+  cursor: pointer;
+}
+
+.main-navbar {
+  margin-top: 1%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4%;
+}
+
+/* .main-navbar .logo {
+  display: 20%;
+} */
+
+.logos {
+  margin-left: 6.5vw;
+}
+
+/* .main-navbar .logo img {
+  height: 5.17vh;
+  width: 9.5vw;
+} */
+
+.main-navbar .links {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dropdown {
+  font-family: "N27";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  justify-self: flex-end;
+  text-align: center;
+}
+
+.dropdown .arrow {
+  height: vw;
+  min-width: 135px;
+  min-height: 47px;
+}
+
+.dropdown .down {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+/* .down h3 {
+  height: 3vw;
+  vertical-align: middle;
+} */
+
+.main-navbar .button button {
+  cursor: pointer;
+  margin-right: 6.5vw;
+  width: 11.453vw;
+  height: 4vw;
+  min-width: 135px;
+  min-height: 47px;
+  background: transparent;
+  color: black;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 2.76vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .logos .vector {
+    width: 5vw;
+    margin-right: 5px;
+  }
+
+  .nfthing {
+    width: 25vw;
+  }
+
+  .logos {
+    margin: 2vw;
+    /* width: 16%; */
+  }
+  .dropdown {
+    display: none;
+  }
+  .main-navbar .button {
+    border: 1pt solid #0000;
+  }
+  .main-navbar .button button {
+    width: auto;
+    height: auto;
+    font-size: 13px;
+  }
+}

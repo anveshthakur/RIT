@@ -1,56 +1,77 @@
-import React, { useRef, useState } from 'react'
-import Html5QrcodePlugin from './Html5QrcodePlugin.jsx'
-// import {QrReader}  from 'react-qr-reader';
+import { useAddress, useMetamask } from "@thirdweb-dev/react";
+import React, { useRef, useState } from "react";
+import Header from "../header/Header.js";
+import "./OwnerMinter.css";
 
-const OwnerMinter = ({claimNft}) => {
-  
-  const [Scan, setScan] = useState(false);
-  const [result, setResult] = useState('');  
-  const address = useRef("");
+const OwnerMinter = ({ claimNft }) => {
+  const connectWithMetamask = useMetamask();
+  const address = useAddress();
 
-  const previewStyle = {
-    "height": "240px",
-    "width": "240px",
-  }
+  const [email, setEmail] = useState("");
+  const [walletAddress, setwalletAddress] = useState(null);
+  const [slno, setSlno] = useState(null);
 
-  const onNewScanResult = (decodedText, decodedResult) => {
-    console.log(decodedText)
-  }
+  const url = "https://api.nfthing.com/owner";
+  // const url = "http://localhost:5000/registerdata";
+  // const url = "http://192.168.172.158:5000/owner";
+
+  const handlePull = () => {
+    const requestOptions = {
+      // mode: 'no-cors',
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        // email: email,
+        slno: slno,
+      }),
+    };
+
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => responses(data));
+  };
+
+  const responses = (data) => {
+    console.log(data);
+    document.getElementById("address").value = data.walletAddress;
+  };
+
+  const mintAndCheck = async () => {
+    claimNft(walletAddress);
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Owner Mint</h1>
-        address: <input type="text" ref={address} />
-        <br />
-        <button onClick={() => claimNft(address.current.value)}>Send To!</button>
-        <br />
-        <button onClick={() => setScan(prev => !prev)}>
-          Scan
-        </button>
-
-        {/* {Scan && 
-          <div style={previewStyle}>
-          <QrReader 
-          delay={300}
-          onResult={(result, error) => {
-            !!result && console.log(result?.text);
-            !!error && console.log(error);
-        }}
-        />
+    <>
+      <Header connectWithMetamask={connectWithMetamask} address={address} />
+      <div className="owner-main">
+        <div className="owner-frame"></div>
+        <div className="scanner">
+          <input
+            id="slno"
+            className="walletId"
+            placeholder="Sl No"
+            onChange={(e) => setSlno(e.target.value)}
+          />
         </div>
-        }  */}
+        <button className="pull" onClick={handlePull}>
+          Pull wallet address
+        </button>
+        <input
+          id="address"
+          placeholder="Wallet address"
+          onChange={(e) => setwalletAddress(e.target.value)}
+        />
+        <div>
+          <input
+            type="submit"
+            className="o-mintbtn"
+            onClick={mintAndCheck}
+            placeholder="Mint"
+          />
+        </div>
+      </div>
+    </>
+  );
+};
 
-          <Html5QrcodePlugin 
-                fps={10}
-                qrbox={250}
-                disableFlip={false}
-                qrCodeSuccessCallback={onNewScanResult}/>  
-
-
-      </header>
-    </div>
-  )
-}
-
-export default OwnerMinter
+export default OwnerMinter;

@@ -1,0 +1,64 @@
+.owner-main {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+  width: 50%;
+  top: 25%;
+  left: 25%;
+}
+
+input {
+  border: none;
+  border-bottom: 0.5px solid black;
+  width: 100%;
+  height: 50px;
+  background-color: transparent;
+  font-family: "N27";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.own-emailerr {
+  width: 100%;
+  visibility: hidden;
+}
+
+.scanner {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.pull {
+  position: relative;
+  left: 20%;
+  width: 50%;
+  font-family: "N27";
+  /* font-style: italic; */
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  transform: skew(-20deg);
+  background: #eff0eb;
+  color: #151515;
+  border: 0.5px solid #151515;
+  cursor: pointer;
+}
+
+.o-mintbtn {
+  position: relative;
+  left: 20%;
+  width: 50%;
+  font-family: "N27";
+  /* font-style: italic; */
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  transform: skew(-20deg);
+  background: #eff0eb;
+  color: #151515;
+  border: 0.5px solid #151515;
+  cursor: pointer;
+}
