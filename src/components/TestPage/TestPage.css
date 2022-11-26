@@ -161,6 +161,46 @@
   }
 }
 
+.socials {
+  position: relative;
+  left: 10vw;
+  width: 160px;
+  font-family: N27;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-top: 55px;
+}
+
+.links {
+  display: flex;
+  margin-left: 17px;
+  margin-top: 10px;
+}
+
+.links p {
+  font-size: 1vw;
+  text-align: center;
+  margin: 0;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.links a {
+  display: flex;
+
+  text-decoration: none;
+  color: black;
+  font-family: "PP NeueBit";
+  font-style: normal;
+  font-size: 16px;
+  margin-left: 15px;
+  align-items: center;
+}
+
 @media only screen and (max-width: 600px) {
   .main {
     display: flex;
