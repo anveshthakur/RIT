@@ -16,12 +16,11 @@ function App() {
   const [balance, setBalance] = useState();
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState(false);
-  
+
   const metaMaskConnect = useMetamask();
   const address = useAddress("0x");
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic";
-
 
   useEffect(() => {
     if (
@@ -49,8 +48,7 @@ function App() {
   });
 
   useEffect(() => {
-    !isChrome && metaMaskConnect()
-    .then(res => window.location.reload);
+    !isChrome && metaMaskConnect().then((res) => window.location.reload);
   }, []);
 
   useEffect(() => {
@@ -69,11 +67,11 @@ function App() {
     "nft-drop"
   );
 
-  const makeApiCall = async(tokenId) => {
+  const makeApiCall = async (tokenId) => {
     const body = {
-      address : address,
-      tokenId : `${openseadef}/${contractAddress}/${tokenId}`
-    }  
+      address: address,
+      tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
+    };
     console.log(body);
     await axios.post("https://api.nfthing.com/successfulmint", body)
     .then(res => console.log(res))
@@ -83,10 +81,9 @@ function App() {
   const claimNft = async (address) => {
     try {
       setLoading(true);
-      await contract.claimTo(address, 1)
-      .then((res) => {
+      await contract.claimTo(address, 1).then((res) => {
         setLoading(false);
-        const tokenId = (res[0].receipt.logs[0].topics[3])
+        const tokenId = res[0].receipt.logs[0].topics[3];
         makeApiCall(parseInt(Number(tokenId)));
       });
     } catch (error) {
@@ -97,7 +94,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/ownerMint" element={<OwnerMinter claimNft={claimNft} />} />
+      <Route path="/owner" element={<OwnerMinter claimNft={claimNft} />} />
       <Route
         path="/"
         element={
@@ -113,7 +110,7 @@ function App() {
         }
       />
       <Route path="/mobile" element={<ChromePage />} />
-      <Route path="/opensea" element={<OpenseaPage /> } />
+      <Route path="/opensea" element={<OpenseaPage />} />
     </Routes>
   );
 }
