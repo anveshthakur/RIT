@@ -11,7 +11,9 @@ const OwnerMinter = ({ claimNft }) => {
   const [walletAddress, setwalletAddress] = useState(null);
   const [slno, setSlno] = useState(null);
 
-  const url = "https://api.nfthing.com/Ownermints";
+  // const url = "https://api.nfthing.com/onsite";
+  // const url = "http://localhost:5000/registerdata";
+  const url = "http://192.168.172.158:5000/owner";
 
   const handlePull = () => {
     const requestOptions = {
@@ -19,7 +21,7 @@ const OwnerMinter = ({ claimNft }) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: email,
+        // email: email,
         slno: slno,
       }),
     };
@@ -30,35 +32,42 @@ const OwnerMinter = ({ claimNft }) => {
   };
 
   const responses = (data) => {
+    console.log(data);
     document.getElementById("address").value = data.walletAddress;
   };
 
-  const mintAndCheck = async() => {
+  const mintAndCheck = async () => {
     claimNft(walletAddress);
-  }
+  };
 
   return (
     <>
       <Header connectWithMetamask={connectWithMetamask} address={address} />
       <div className="owner-main">
-        <div className="owner-frame">
-          <input
-            id="email"
-            className="own-email"
-            type="email"
-            placeholder="Enter Your email address"
-            onChange={(e) => setEmail(e.target.value)}
-          />       
-          <br />
-          <span className="own-emailerr">Enter a right email</span>
-        </div>
+        <div className="owner-frame"></div>
         <div className="scanner">
-          <input id="slno" className="walletId" placeholder="Sl No" onChange={(e) => setSlno(e.target.value)} />
+          <input
+            id="slno"
+            className="walletId"
+            placeholder="Sl No"
+            onChange={(e) => setSlno(e.target.value)}
+          />
         </div>
-        <button className="pull">Pull wallet address</button>
-        <input id="address" placeholder="Wallet address" onChange={(e) => setwalletAddress(e.target.value)} />
+        <button className="pull" onClick={handlePull}>
+          Pull wallet address
+        </button>
+        <input
+          id="address"
+          placeholder="Wallet address"
+          onChange={(e) => setwalletAddress(e.target.value)}
+        />
         <div>
-          <input type="submit" className="o-mintbtn" onClick={mintAndCheck} placeholder="Mint" />
+          <input
+            type="submit"
+            className="o-mintbtn"
+            onClick={mintAndCheck}
+            placeholder="Mint"
+          />
         </div>
       </div>
     </>
