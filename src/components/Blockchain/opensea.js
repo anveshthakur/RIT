@@ -8,14 +8,17 @@ export async function tokensOfOwner(address){
         abi,
         new ethers.providers.Web3Provider(window.ethereum)
     )
-    console.log(address);
-    let ts = (await contract.totalSupply()).toNumber();
-    for (let i = 0; i < ts; i++) {
+    const balanceOf = address && ((await contract.balanceOf(address)).toNumber())
+    if(balanceOf === 0){
+        return null
+    }else{
+        let ts = (await contract.totalSupply()).toNumber();
+        for (let i = 0; i < ts; i++) {
         let tokenOwner = await contract.ownerOf(i);
         if(tokenOwner === address){
-            console.log(i);
             return i;
         }
+    }
     }
 }
 

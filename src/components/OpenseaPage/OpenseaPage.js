@@ -9,7 +9,6 @@ const OpenseaPage = () => {
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   const address = useAddress();
   let openseadef = "https://opensea.io/assets/matic";
-
   let metaMaskConnect = useMetamask();
 
   const [token, setToken] = useState();
