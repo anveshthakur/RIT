@@ -11,7 +11,7 @@ export const TestPage = ({ claimNft, loading }) => {
   const address = useAddress();
   const navigate = useNavigate();
 
-  const [errLoad, setErrLoad] = useState(false);
+  const [errLoad, setErrLoad] = useState(true);
   const [whiteListed, setWhiteListed] = useState(false);
 
   useEffect(() => {
@@ -21,15 +21,21 @@ export const TestPage = ({ claimNft, loading }) => {
         setWhiteListed(res);
       });
     }
-    console.log(address);
+    async function check_network(){
+      const chainId = 137;
+      if (window.ethereum.networkVersion == chainId) {
+        setErrLoad(true);
+      }else{
+        setErrLoad(false);
+      }
+    }
     get_allowed();
-  }, [address]);
+    check_network();
+  }, [address, errLoad]);
 
   const checkAndMint = async () => {
     const chainId = 137;
-
     !whiteListed && navigate("/opensea");
-
     if (window.ethereum.networkVersion != chainId) {
       setErrLoad(true);
     } else {
@@ -78,7 +84,7 @@ export const TestPage = ({ claimNft, loading }) => {
               }}
             >
               {/* disable address button if address is null or undefined */}
-              {address && whiteListed ? (
+              {address && whiteListed && errLoad ? (
                 loading ? (
                   <div
                     style={{ transform: "skew(25deg)", "margin-top": "0.7vh" }}

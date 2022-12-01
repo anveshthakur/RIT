@@ -7,7 +7,6 @@ import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
 import { contract_balanceOf } from "./components/Blockchain/opensea";
 import { useEffect, useState } from "react";
 import ChromePage from "./components/ChromePage/ChromePage";
-import { ethers } from "ethers";
 import axios from "axios";
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
   const [matches, setMatches] = useState(false);
 
   const metaMaskConnect = useMetamask();
-  const address = useAddress("0x");
+  const address = useAddress();
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic";
 
@@ -38,7 +37,6 @@ function App() {
     if (typeof window.ethereum !== "undefined") {
       setMetabrowser(true);
     }
-    console.log(metabrowser);
   });
 
   useEffect(() => {
@@ -67,15 +65,15 @@ function App() {
     "nft-drop"
   );
 
-  const makeApiCall = async (addressFor, tokenId) => {
-    const body = {
-      address: addressFor,
-      tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
-    };
-    await axios.post("http://192.168.172.158:5000/successfulmint", body)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }
+  // const makeApiCall = async (addressFor, tokenId) => {
+  //   const body = {
+  //     address: addressFor,
+  //     tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
+  //   };
+  //   await axios.post("http://192.168.172.158:5000/successfulmint", body)
+  //   .then(res => console.log(res))
+  //   .catch(err => console.log(err))
+  // }
 
   const claimNft = async (address) => {
     try {
@@ -83,11 +81,11 @@ function App() {
       await contract.claimTo(address, 1).then((res) => {
         setLoading(false);
         const tokenId = res[0].receipt.logs[0].topics[3];
-        makeApiCall(address, parseInt(Number(tokenId)));
+        // makeApiCall(address, parseInt(Number(tokenId)));
       });
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      console.log(error); //SOMETHING WENT WRONG BUTTON MAYBE
     }
   };
 
