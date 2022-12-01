@@ -32,7 +32,7 @@ const OpenseaPage = () => {
     <>
       <Header connectWithMetamask={metaMaskConnect} address={address} />
       {
-        token ? (
+        token || token === 0 ? (
           <div className="main1">
         <div className="frame-bar">
           <div className="square"></div>
