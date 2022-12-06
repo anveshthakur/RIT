@@ -67,14 +67,15 @@ function App() {
     "nft-drop"
   );
 
-  const makeApiCall = async (tokenId) => {
+  const makeApiCall = async (addressFor, tokenId) => {
     const body = {
-      address: address,
+      address: addressFor,
       tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
     };
-    console.log(body);
-    // axios.post("https://api.nfthing.com/", body);
-  };
+    await axios.post("http://192.168.172.158:5000/successfulmint", body)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
 
   const claimNft = async (address) => {
     try {
@@ -82,7 +83,7 @@ function App() {
       await contract.claimTo(address, 1).then((res) => {
         setLoading(false);
         const tokenId = res[0].receipt.logs[0].topics[3];
-        makeApiCall(parseInt(Number(tokenId)));
+        makeApiCall(address, parseInt(Number(tokenId)));
       });
     } catch (error) {
       setLoading(false);
