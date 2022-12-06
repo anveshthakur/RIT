@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import OwnerMinter from "./components/OwnerMinter/OwnerMinter";
 import { useAddress, useContract, useMetamask } from "@thirdweb-dev/react";
 import { TestPage } from "./components/TestPage/TestPage";
@@ -20,6 +20,8 @@ function App() {
   const address = useAddress();
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic";
+  let polygonLink = "https://polygonscan.com";
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (
@@ -65,23 +67,33 @@ function App() {
     "nft-drop"
   );
 
-  // const makeApiCall = async (addressFor, tokenId) => {
-  //   const body = {
-  //     address: addressFor,
-  //     tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
-  //   };
-  //   await axios.post("http://192.168.172.158:5000/successfulmint", body)
-  //   .then(res => console.log(res))
-  //   .catch(err => console.log(err))
-  // }
+  const makeApiCall = async (addressFor, tokenId, txHash) => {
+    const body = {
+      address: addressFor,
+      tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
+      txHash: `${polygonLink}/tx/${txHash}`
+    };
+
+    console.log(body);
+
+    await axios.post("https://api.nfthing.com/successfulmint", body)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
 
   const claimNft = async (address) => {
     try {
       setLoading(true);
-      await contract.claimTo(address, 1).then((res) => {
-        setLoading(false);
+      await contract.claimTo(address, 1)
+      .then((res) => {
+        const transactionHash = res[0].receipt.transactionHash
         const tokenId = res[0].receipt.logs[0].topics[3];
-        // makeApiCall(address, parseInt(Number(tokenId)));
+        console.log("Making the API call");
+        makeApiCall(address, parseInt(Number(tokenId)), transactionHash)
+        .then(() => {
+          setLoading(false);
+          navigate("/opensea")
+        })
       });
     } catch (error) {
       setLoading(false);

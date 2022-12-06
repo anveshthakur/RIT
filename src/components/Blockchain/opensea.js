@@ -48,7 +48,13 @@ export async function contract_getWhiteListed(address){
         {addr: "0xa58D762cDa3a4Bf4a081b5f57FF1Ac73337CCFAE", qty: 5},
         {addr: "0x75f15be75a35cfD4f12Bf56c71963BbE464Ddf4E", qty: 1},
         {addr: "0xbd7C0b157C0Db088B572259EafBD29af0eB05125", qty: 0},
-        {addr: "0xD9c401bb03852d18C83Cb597463f0C5E0b31eab0", qty: 0}
+        {addr: "0x66099E92c028271B02805376EdD8fd9d320FbBFb", qty: 0},
+        {addr: "0xFA4bfE43030BA9933F6dbC68a42C388952810E23", qty: 0},
+        {addr: "0x9b5F4A194a44D46189D56d3eCfA0071Cf6f3edB2", qty: 0},
+        {addr: "0x47182D6a394396C6A84AA9bE4fa987721984838B", qty: 0},
+        {addr: "0x32e28E36384beA019e9d09e72aB83E0bC7831bE0", qty: 0},
+        {addr: "0x93f88B1B1711Ffb5584B121Fe01313dDf1155EC0", qty: 0},
+
     ]
     snapshot.map(l => whiteListSet.add(l.addr));
     return await whiteListSet.has(address);
