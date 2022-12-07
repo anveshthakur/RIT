@@ -73,10 +73,8 @@ function App() {
       tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
       txHash: `${polygonLink}/tx/${txHash}`
     };
-
     console.log(body);
-
-    await axios.post("https://api.nfthing.com/successfulmint", body)
+    await axios.post("https://apitest.nfthing.com/successfulmint", body)
     .then(res => console.log(res))
     .catch(err => console.log(err))
   }
@@ -93,7 +91,7 @@ function App() {
         setLoading(false);
         navigate({
           pathname: "/opensea",
-          search: `?tokenId=${tokenId}`
+          search: `?tokenId=${parseInt(Number(tokenId))}`
         })
       });
     } catch (error) {

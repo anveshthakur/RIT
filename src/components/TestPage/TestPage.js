@@ -5,6 +5,7 @@ import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import { contract_balanceOf, contract_getWhiteListed } from "../Blockchain/opensea";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const TestPage = ({ claimNft, loading }) => {
   const connectWithMetamask = useMetamask();
@@ -15,12 +16,19 @@ export const TestPage = ({ claimNft, loading }) => {
   const [whiteListed, setWhiteListed] = useState(false);
 
   useEffect(() => {
+    
     async function get_allowed() {
-      await contract_getWhiteListed(address).then((res) => {
-        address && !res && navigate("/opensea");
-        setWhiteListed(res);
-      });
+      const body = {
+        walletAddress: address
+      };
+      address && await axios.post("https://apitest.nfthing.com/whitelist", body)
+      .then(res => {
+        console.log(res.data.message);
+        setWhiteListed(res.data.message)
+      })
+      .catch(err => console.log(err))    
     }
+
     async function check_network(){
       const chainId = 137;
       if (window.ethereum.networkVersion == chainId) {
@@ -29,6 +37,7 @@ export const TestPage = ({ claimNft, loading }) => {
         setErrLoad(false);
       }
     }
+    
     get_allowed();
     check_network();
   }, [address, errLoad]);
