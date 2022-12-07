@@ -4,6 +4,7 @@ import Header from "../header/Header";
 import "./OpenseaPage.css";
 import { tokensOfOwner } from "../Blockchain/opensea";
 import opensea from "../../logos/opensea.png";
+import { useSearchParams } from "react-router-dom";
 
 const OpenseaPage = () => {
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
@@ -13,6 +14,7 @@ const OpenseaPage = () => {
 
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(true);
+  const [searchParams, _] = useSearchParams();
 
   useEffect(() => {
     async function getToken() {
@@ -24,7 +26,14 @@ const OpenseaPage = () => {
       .catch(err => console.log(err));
       metaMaskConnect();
     }
-    getToken();
+
+    if(searchParams.get("tokenId")){
+      console.log(searchParams.get("tokenId"))
+      setToken(searchParams.get("tokenId"));
+      setLoading(false);
+    }else{
+      getToken();
+    }
   }, [address]);
 
   return (

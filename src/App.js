@@ -90,9 +90,10 @@ function App() {
         const tokenId = res[0].receipt.logs[0].topics[3];
         console.log("Making the API call");
         makeApiCall(address, parseInt(Number(tokenId)), transactionHash)
-        .then(() => {
-          setLoading(false);
-          navigate("/opensea")
+        setLoading(false);
+        navigate({
+          pathname: "/opensea",
+          search: `?tokenId=${tokenId}`
         })
       });
     } catch (error) {
@@ -108,7 +109,9 @@ function App() {
         path="/"
         element={
           !isChrome ? (
-            balance ? (
+            // balance ? 
+            false ?
+            (
               <OpenseaPage />
             ) : (
               <TestPage claimNft={claimNft} loading={loading} />
