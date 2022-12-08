@@ -3,7 +3,10 @@ import Header from "../header/Header";
 import "./TestPage.css";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
-import { contract_balanceOf, contract_getWhiteListed } from "../Blockchain/opensea";
+import {
+  contract_balanceOf,
+  contract_getWhiteListed,
+} from "../Blockchain/opensea";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -48,7 +51,7 @@ export const TestPage = ({ claimNft, loading }) => {
     if (window.ethereum.networkVersion != chainId) {
       setErrLoad(true);
     } else {
-      await claimNft(address)
+      await claimNft(address);
     }
   };
 
@@ -63,7 +66,7 @@ export const TestPage = ({ claimNft, loading }) => {
         <div className="left">
           <div className="top">
             <div className="top-f">
-              <t className="date">//RIT X NFTHING</t>
+              <span className="date">//RIT X NFTHING</span>
             </div>
             <div className="hack">
               <h1>HACKATHON</h1> <h2>EXCLUSIVE NFTS</h2>
@@ -111,7 +114,7 @@ export const TestPage = ({ claimNft, loading }) => {
             </div>
           </div>
           <div className="socials">
-            <div class="gentext">
+            <div className="gentext">
               {" "}
               //GENERATING <br></br> SOCIAL LINKS FROM INDEX
             </div>
@@ -129,6 +132,15 @@ export const TestPage = ({ claimNft, loading }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="squares">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </>
   );
