@@ -20,7 +20,6 @@ const OpenseaPage = () => {
   useEffect(() => {
     metaMaskConnect();
     if(searchParams.get("tokenId")){
-      console.log(searchParams.get("tokenId"))
       setToken(searchParams.get("tokenId"));
       setLoading(false);
     }else{

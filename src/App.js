@@ -85,13 +85,14 @@ function App() {
       await contract.claimTo(address, 1)
       .then((res) => {
         const transactionHash = res[0].receipt.transactionHash
-        const tokenId = res[0].receipt.logs[0].topics[3];
+        let tokenId = res[0].receipt.logs[0].topics[3];
+        tokenId = parseInt(Number(tokenId));
         console.log("Making the API call");
-        makeApiCall(address, parseInt(Number(tokenId)), transactionHash)
+        makeApiCall(address, tokenId, transactionHash)
         setLoading(false);
         navigate({
           pathname: "/opensea",
-          search: `?tokenId=${parseInt(Number(tokenId))}`
+          search: `?tokenId=${tokenId}`
         })
       });
     } catch (error) {
