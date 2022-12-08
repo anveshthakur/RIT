@@ -51,7 +51,7 @@ export const TestPage = ({ claimNft, loading }) => {
         <div className="left">
           <div className="top">
             <div className="top-f">
-              <t className="date">//RIT X NFTHING</t>
+              <span className="date">//RIT X NFTHING</span>
             </div>
             <div className="hack">
               <h1>HACKATHON</h1> <h2>EXCLUSIVE NFTS</h2>
@@ -99,7 +99,7 @@ export const TestPage = ({ claimNft, loading }) => {
             </div>
           </div>
           <div className="socials">
-            <div class="gentext">
+            <div className="gentext">
               {" "}
               //GENERATING <br></br> SOCIAL LINKS FROM INDEX
             </div>
