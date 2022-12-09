@@ -172,7 +172,8 @@
 
 .socials {
   position: relative;
-  left: 10vw;
+  left: 20vw;
+  top: 10vh;
   width: 160px;
   font-family: N27;
   font-size: 10px;
@@ -321,5 +322,10 @@
   }
   .squares {
     display: none;
+  }
+
+  .socials {
+    left: 10vw;
+    top: 0;
   }
 }

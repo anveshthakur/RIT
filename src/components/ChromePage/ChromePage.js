@@ -63,7 +63,7 @@ const ChromePage = () => {
             OPEN METAMASK
           </a>
         </div>
-        <div className="socials mob">
+        <div className="socialsChrome mob">
           <div class="gentext">
             {" "}
             //GENERATING <br></br> SOCIAL LINKS FROM INDEX
