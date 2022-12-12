@@ -3,10 +3,6 @@ import Header from "../header/Header";
 import "./TestPage.css";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
-import {
-  contract_balanceOf,
-  contract_getWhiteListed,
-} from "../Blockchain/opensea";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -26,7 +22,9 @@ export const TestPage = ({ claimNft, loading }) => {
       };
       address && await axios.post("https://apitest.nfthing.com/whitelist", body)
       .then(res => {
-        console.log(res.data.message);
+        if(!res.data.message){
+          navigate("/opensea")
+        }
         setWhiteListed(res.data.message)
       })
       .catch(err => console.log(err))    
