@@ -98,24 +98,6 @@ export const TestPage = ({ claimNft, loading }) => {
               )}
             </div>
           </div>
-          <div className="socials">
-            <div className="gentext">
-              {" "}
-              //GENERATING <br></br> SOCIAL LINKS FROM INDEX
-            </div>
-            <h2>FOLLOW US ON</h2>
-            <div className="links">
-              <a href="https://twitter.com/NFThing_" target="_blank">
-                <BsTwitter className="icon" /> <p>TWITTER</p>
-              </a>
-              <a
-                href="https://instagram.com/nfthing_?igshid=YmMyMTA2M2Y="
-                target="_blank"
-              >
-                <BsInstagram className="icon" /> <p>INSTAGRAM</p>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
       <div className="dots_lines desktop">
@@ -204,6 +186,24 @@ export const TestPage = ({ claimNft, loading }) => {
         <div></div>
         <div></div>
         <div></div>
+      </div>
+      <div className="socials">
+        <div className="gentext">
+          {" "}
+          //GENERATING <br></br> SOCIAL LINKS FROM INDEX
+        </div>
+        <h2>FOLLOW US ON</h2>
+        <div className="links">
+          <a href="https://twitter.com/NFThing_" target="_blank">
+            <BsTwitter className="icon" /> <p>TWITTER</p>
+          </a>
+          <a
+            href="https://instagram.com/nfthing_?igshid=YmMyMTA2M2Y="
+            target="_blank"
+          >
+            <BsInstagram className="icon" /> <p>INSTAGRAM</p>
+          </a>
+        </div>
       </div>
     </>
   );
