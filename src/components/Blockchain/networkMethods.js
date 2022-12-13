@@ -7,13 +7,18 @@ export const changeNetwork = async(params) => {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: ethers.utils.hexValue(chainId) }],
-        });
-      } catch (error) {
+        })
+        window.location.reload();
+      }
+      catch (error) {
         if (error.code === 4902) {
-          const res = await addNetwork();
-          return res;
+          try{
+            await addNetwork();
+          }catch(err){
+            throw err
+          }
         }
-        console.log(error);
+        throw error
       }
     }
   }
@@ -38,6 +43,6 @@ const addNetwork = async () => {
       })
       window.location.reload();
     } catch(err){
-      return err.code;
+      throw err
     }    
   };
