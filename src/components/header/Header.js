@@ -15,7 +15,7 @@ const Header = ({
 
   const checkNetwork = async() => {    
     try{
-      await changeNetwork
+      address && window.ethereum.networkVersion != 137 && await changeNetwork();
       setErrMsg(false)
     }
     catch(err){
@@ -24,7 +24,7 @@ const Header = ({
   }
   
   useEffect(() => {
-    address && checkNetwork();
+    checkNetwork();
   }, [address])
 
   return (

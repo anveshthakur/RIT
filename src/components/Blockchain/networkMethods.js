@@ -8,7 +8,7 @@ export const changeNetwork = async(params) => {
           method: "wallet_switchEthereumChain",
           params: [{ chainId: ethers.utils.hexValue(chainId) }],
         })
-        window.location.reload();
+        .then(res => res == null && window.location.reload());
       }
       catch (error) {
         if (error.code === 4902) {
