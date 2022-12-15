@@ -8,32 +8,30 @@ import { changeNetwork } from '../Blockchain/networkMethods';
 
 const Header = ({ 
   connectWithMetamask, 
-  address, 
-  errLoad }) => {
+  address,
+  errLoad
+  }) => {
+  const [errMsg, setErrMsg] = useState(true);
 
-  const [errMsg, setErrMsg] = useState(errLoad);
-
-  const checkNetwork = async() => {
-    let res = await changeNetwork();
-    if(res === 4001){
-      setErrMsg(true);
-    }else{
-      setErrMsg(false);
+  const checkNetwork = async() => {    
+    try{
+      address && window.ethereum.networkVersion != 137 && await changeNetwork();
+      setErrMsg(false)
+    }
+    catch(err){
+      err?.code === 4001 && setErrMsg(true)
     }
   }
-
+  
   useEffect(() => {
     checkNetwork();
-  }, []);
-
-  useEffect(() => {
-  }, [errMsg])
+  }, [address])
 
   return (
     <nav className="navbar">
       <div
         className="page-error"
-        style={{ visibility: errMsg
+        style={{ visibility: errMsg || errLoad
           ? "visible" 
           : "hidden" }}
       >

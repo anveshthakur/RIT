@@ -3,10 +3,6 @@ import Header from "../header/Header";
 import "./TestPage.css";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
-import {
-  contract_balanceOf,
-  contract_getWhiteListed,
-} from "../Blockchain/opensea";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -15,7 +11,7 @@ export const TestPage = ({ claimNft, loading }) => {
   const address = useAddress();
   const navigate = useNavigate();
 
-  const [errLoad, setErrLoad] = useState(true);
+  const [errLoad, setErrLoad] = useState(false);
   const [whiteListed, setWhiteListed] = useState(false);
 
   useEffect(() => {
@@ -26,7 +22,9 @@ export const TestPage = ({ claimNft, loading }) => {
       };
       address && await axios.post("https://apitest.nfthing.com/whitelist", body)
       .then(res => {
-        console.log(res.data.message);
+        if(!res.data.message){
+          navigate("/opensea")
+        }
         setWhiteListed(res.data.message)
       })
       .catch(err => console.log(err))    
@@ -34,7 +32,7 @@ export const TestPage = ({ claimNft, loading }) => {
 
     async function check_network(){
       const chainId = 137;
-      if (window.ethereum.networkVersion == chainId) {
+      if (window.ethereum.networkVersion != chainId) {
         setErrLoad(true);
       }else{
         setErrLoad(false);
@@ -96,10 +94,10 @@ export const TestPage = ({ claimNft, loading }) => {
               }}
             >
               {/* disable address button if address is null or undefined */}
-              {address && whiteListed && errLoad ? (
+              {address && whiteListed ? (
                 loading ? (
                   <div
-                    style={{ transform: "skew(25deg)", "margin-top": "0.7vh" }}
+                    style={{ transform: "skew(25deg)", "marginTop": "0.7vh" }}
                   >
                     <div className="loader1"></div>
                   </div>

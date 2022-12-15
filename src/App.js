@@ -15,9 +15,10 @@ function App() {
   const [balance, setBalance] = useState();
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState(false);
+  const [address, setAddress] = useState();
 
-  const metaMaskConnect = useMetamask();
-  const address = useAddress();
+  const metaMaskConnect = useMetamask()
+  // const address = useAddress();
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic";
   let polygonLink = "https://polygonscan.com";
@@ -48,8 +49,16 @@ function App() {
   });
 
   useEffect(() => {
-    !isChrome && metaMaskConnect().then((res) => window.location.reload);
-  }, []);
+    !isChrome && 
+    metaMaskConnect()
+    .then(res => {
+      if(res.data?.account){
+        setAddress(res.data?.account);
+      }else if(res.error){
+        console.log("error");
+      }
+    })
+  }, [address]);
 
   useEffect(() => {
     async function getBalance() {
