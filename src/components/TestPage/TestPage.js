@@ -111,23 +111,83 @@ export const TestPage = ({ claimNft, loading }) => {
               )}
             </div>
           </div>
-          <div className="socials">
-            <div className="gentext">
-              {" "}
-              //GENERATING <br></br> SOCIAL LINKS FROM INDEX
-            </div>
-            <h2>FOLLOW US ON</h2>
-            <div className="links">
-              <a href="https://twitter.com/NFThing_" target="_blank">
-                <BsTwitter className="icon" /> <p>TWITTER</p>
-              </a>
-              <a
-                href="https://instagram.com/nfthing_?igshid=YmMyMTA2M2Y="
-                target="_blank"
-              >
-                <BsInstagram className="icon" /> <p>INSTAGRAM</p>
-              </a>
-            </div>
+        </div>
+      </div>
+      <div className="dots_lines desktop">
+        <div
+          className="sq"
+          style={{ position: "absolute", left: "12.40vw", top: "95vh" }}
+        ></div>
+        <div
+          className="sq"
+          style={{
+            position: "absolute",
+            left: "12.40vw",
+            top: "95vh",
+            marginLeft: "15px",
+          }}
+        ></div>
+
+        <div
+          className="sq"
+          style={{
+            position: "absolute",
+            left: "6.5vw",
+            top: "28.2vh",
+            width: "12px",
+            height: "12px",
+          }}
+        ></div>
+
+        <div
+          className="sq"
+          style={{
+            position: "absolute",
+            left: "69.5vw",
+            top: "57.5vh",
+          }}
+        ></div>
+
+        <div
+          className="linedot"
+          style={{
+            position: "absolute",
+            right: "47px",
+            top: "52.7vh",
+            transform: "rotate(270deg)",
+          }}
+        >
+          <div className="linethin"></div>
+          <div className="sq3" style={{ top: "-59px" }}></div>
+          <div
+            className="sq3"
+            style={{ top: "-71px", marginBottom: "12px" }}
+          ></div>
+        </div>
+
+        <div
+          className="4square"
+          style={{
+            display: "block",
+            position: "absolute",
+            left: "55.3vw",
+            top: "57.6vh",
+          }}
+        >
+          <div style={{ display: "flex" }}>
+            <div className="sq3" style={{ position: "unset" }}></div>
+            <div
+              className="sq3"
+              style={{ marginLeft: "3px", position: "unset" }}
+            ></div>
+          </div>
+
+          <div style={{ display: "flex", marginTop: "3px" }}>
+            <div className="sq3" style={{ position: "unset" }}></div>
+            <div
+              className="sq3"
+              style={{ marginLeft: "3px", position: "unset" }}
+            ></div>
           </div>
         </div>
       </div>
@@ -139,6 +199,24 @@ export const TestPage = ({ claimNft, loading }) => {
         <div></div>
         <div></div>
         <div></div>
+      </div>
+      <div className="socials">
+        <div className="gentext">
+          {" "}
+          //GENERATING <br></br> SOCIAL LINKS FROM INDEX
+        </div>
+        <h2>FOLLOW US ON</h2>
+        <div className="links">
+          <a href="https://twitter.com/NFThing_" target="_blank">
+            <BsTwitter className="icon" /> <p>TWITTER</p>
+          </a>
+          <a
+            href="https://instagram.com/nfthing_?igshid=YmMyMTA2M2Y="
+            target="_blank"
+          >
+            <BsInstagram className="icon" /> <p>INSTAGRAM</p>
+          </a>
+        </div>
       </div>
     </>
   );

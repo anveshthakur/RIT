@@ -172,7 +172,8 @@
 
 .socials {
   position: relative;
-  left: 10vw;
+  left: 20vw;
+  top: 10vh;
   width: 160px;
   font-family: N27;
   font-size: 10px;
@@ -253,6 +254,51 @@
   width: 6.6vw;
 }
 
+.sq {
+  width: 8px;
+  height: 8px;
+  background: #151515;
+  position: absolute;
+}
+
+.sr {
+  right: 0px;
+  margin-right: 7.75vw;
+}
+
+.sl {
+  left: 0px;
+  margin-left: 7.75vw;
+}
+.sq3 {
+  width: 3px;
+  height: 3px;
+  background: #151515;
+  position: absolute;
+}
+
+.linethin {
+  width: 94px;
+  height: 1px;
+  background: #151515;
+  transform: rotate(-90deg);
+}
+
+.linedot {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  width: 0px;
+}
+
 @media only screen and (max-width: 600px) {
   .main {
     display: flex;
@@ -271,6 +317,7 @@
     align-items: center;
     margin: 0;
     margin-top: 7vh;
+    margin-bottom: 7vh;
   }
 
   .top {
@@ -319,7 +366,43 @@
     margin-top: 7%;
     font-size: 4vw;
   }
-  .squares {
+  .squares :nth-child(1) {
+    display: none;
+  }
+
+  .squares :nth-child(2) {
+    display: none;
+  }
+  .squares :nth-child(3) {
+    height: 33.02vw;
+    width: 20.08vw;
+  }
+  .squares :nth-child(4) {
+    height: 53.2vw;
+    width: 59.2vw;
+  }
+  .squares :nth-child(5) {
+    height: 33.02vw;
+    width: 20.08vw;
+  }
+
+  .squares :nth-child(6) {
+    display: none;
+  }
+  .squares :nth-child(7) {
+    display: none;
+  }
+
+  .socials {
+    left: 30vw;
+    top: 0;
+  }
+
+  .links {
+    margin-left: 0;
+  }
+
+  .dots_lines {
     display: none;
   }
 }
