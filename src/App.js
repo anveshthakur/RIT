@@ -72,10 +72,11 @@ function App() {
       address: addressFor,
       tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
     };
-    await axios.post("http://192.168.172.158:5000/successfulmint", body)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }
+    await axios
+      .post("https://apitest.nfthing.com/successfulmint", body)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   const claimNft = async (address) => {
     try {
