@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import OwnerMinter from "./components/OwnerMinter/OwnerMinter";
 import { useAddress, useContract, useMetamask } from "@thirdweb-dev/react";
 import { TestPage } from "./components/TestPage/TestPage";
@@ -7,7 +7,6 @@ import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
 import { contract_balanceOf } from "./components/Blockchain/opensea";
 import { useEffect, useState } from "react";
 import ChromePage from "./components/ChromePage/ChromePage";
-import { ethers } from "ethers";
 import axios from "axios";
 
 function App() {
@@ -16,11 +15,14 @@ function App() {
   const [balance, setBalance] = useState();
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState(false);
+  const [address, setAddress] = useState();
 
   const metaMaskConnect = useMetamask();
-  const address = useAddress("0x");
+  // const address = useAddress();
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic";
+  let polygonLink = "https://polygonscan.com";
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (
@@ -38,7 +40,6 @@ function App() {
     if (typeof window.ethereum !== "undefined") {
       setMetabrowser(true);
     }
-    console.log(metabrowser);
   });
 
   useEffect(() => {
@@ -48,8 +49,15 @@ function App() {
   });
 
   useEffect(() => {
-    !isChrome && metaMaskConnect().then((res) => window.location.reload);
-  }, []);
+    !isChrome &&
+      metaMaskConnect().then((res) => {
+        if (res.data?.account) {
+          setAddress(res.data?.account);
+        } else if (res.error) {
+          console.log("error");
+        }
+      });
+  }, [address]);
 
   useEffect(() => {
     async function getBalance() {
@@ -67,11 +75,13 @@ function App() {
     "nft-drop"
   );
 
-  const makeApiCall = async (addressFor, tokenId) => {
+  const makeApiCall = async (addressFor, tokenId, txHash) => {
     const body = {
       address: addressFor,
       tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
+      txHash: `${polygonLink}/tx/${txHash}`,
     };
+    console.log(body);
     await axios
       .post("https://apitest.nfthing.com/successfulmint", body)
       .then((res) => console.log(res))
@@ -82,13 +92,20 @@ function App() {
     try {
       setLoading(true);
       await contract.claimTo(address, 1).then((res) => {
+        const transactionHash = res[0].receipt.transactionHash;
+        let tokenId = res[0].receipt.logs[0].topics[3];
+        tokenId = parseInt(Number(tokenId));
+        console.log("Making the API call");
+        makeApiCall(address, tokenId, transactionHash);
         setLoading(false);
-        const tokenId = res[0].receipt.logs[0].topics[3];
-        makeApiCall(address, parseInt(Number(tokenId)));
+        navigate({
+          pathname: "/opensea",
+          search: `?tokenId=${tokenId}`,
+        });
       });
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      console.log(error); //SOMETHING WENT WRONG BUTTON MAYBE
     }
   };
 
@@ -99,7 +116,8 @@ function App() {
         path="/"
         element={
           !isChrome ? (
-            balance ? (
+            // balance ?
+            false ? (
               <OpenseaPage />
             ) : (
               <TestPage claimNft={claimNft} loading={loading} />

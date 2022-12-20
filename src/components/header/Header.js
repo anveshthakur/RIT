@@ -3,58 +3,37 @@ import "./Header.css";
 import nfthing from "../../logos/Group 1.png";
 import vector from "../../logos/Vector.png";
 import { Link } from "react-router-dom";
-import { AiOutlineDown } from "react-icons/ai";
-import { ethers } from "ethers";
 import polygon from "../../logos/polygon.png";
+import { changeNetwork } from '../Blockchain/networkMethods';
 
-const Header = ({ connectWithMetamask, address, errLoad }) => {
+const Header = ({ 
+  connectWithMetamask, 
+  address,
+  errLoad
+  }) => {
+  const [errMsg, setErrMsg] = useState(true);
 
-  async function changeNetwork(params) {
-    const chainId = 137;
-    if (window.ethereum.networkVersion != chainId) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: ethers.utils.hexValue(chainId) }],
-        });
-      } catch (error) {
-        if (error.code === 4902) {
-          addNetwork();
-        }
-        console.log(error);
-      }
+  const checkNetwork = async() => {    
+    try{
+      address && window.ethereum.networkVersion != 137 && await changeNetwork();
+      setErrMsg(false)
+    }
+    catch(err){
+      err?.code === 4001 && setErrMsg(true)
     }
   }
-
-  const addNetwork = async () => {
-    await window.ethereum.request({
-      method: "wallet_addEthereumChain",
-      params: [
-        {
-          chainId: ethers.utils.hexlify(137),
-          chainName: "Polygon Mainnet",
-          rpcUrls: ["https://polygon-rpc.com"],
-          blockExplorerUrls: ["https://polygonscan.com"],
-          nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18,
-          },
-        },
-      ],
-    });
-    window.location.reload();
-  };
-
+  
   useEffect(() => {
-    changeNetwork();
-  }, []);
+    checkNetwork();
+  }, [address])
 
   return (
     <nav className="navbar">
       <div
         className="page-error"
-        style={{ visibility: errLoad ? "visible" : "hidden" }}
+        style={{ visibility: errMsg || errLoad
+          ? "visible" 
+          : "hidden" }}
       >
         <h1>PLEASE CONNECT TO POLYGON NETWORK</h1>
         <button onClick={changeNetwork}>

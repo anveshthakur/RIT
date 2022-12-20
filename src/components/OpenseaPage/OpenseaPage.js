@@ -4,28 +4,40 @@ import Header from "../header/Header";
 import "./OpenseaPage.css";
 import { tokensOfOwner } from "../Blockchain/opensea";
 import opensea from "../../logos/opensea.png";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const OpenseaPage = () => {
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   const address = useAddress();
   let openseadef = "https://opensea.io/assets/matic";
-
   let metaMaskConnect = useMetamask();
 
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(true);
+  const [searchParams, _] = useSearchParams();
 
   useEffect(() => {
-    async function getToken() {
-      await tokensOfOwner(address)
+    metaMaskConnect();
+    if(searchParams.get("tokenId")){
+      setToken(searchParams.get("tokenId"));
+      setLoading(false);
+    }else{
+      const body = {
+        walletAddress: address
+      }
+      axios.post("https://apitest.nfthing.com/links", body)
       .then(res => {
-        setToken(res)
+        const openSeaLink = res.data.tokenId;
+        setToken(openSeaLink.slice(75));
         setLoading(false);
       })
-      .catch(err => console.log(err));
-      metaMaskConnect();
+      .catch(err => {
+        setToken(null);
+        setLoading(false);
+        console.log(err)
+      });
     }
-    getToken();
   }, [address]);
 
   return (
@@ -33,7 +45,8 @@ const OpenseaPage = () => {
     <>
       <Header connectWithMetamask={metaMaskConnect} address={address} />
       {
-        token ? (
+        token || token === 0 ? 
+        (
           <div className="main1">
         <div className="frame-bar">
           <div className="square"></div>
