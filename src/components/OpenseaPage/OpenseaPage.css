@@ -97,7 +97,7 @@ body {
   text-transform: uppercase;
 }
 
-.socials1 {
+.opensea {
   display: flex;
   justify-content: center;
   font-family: "PP NeueBit";
@@ -109,7 +109,7 @@ body {
   margin-bottom: 20px;
 }
 
-.socials1 a {
+.opensea a {
   text-decoration: none;
   color: #151515;
 }
@@ -127,6 +127,12 @@ body {
   height: 9.18vh;
 
   animation: spin 2s linear infinite;
+}
+
+.socials {
+  position: absolute;
+  top: 75%;
+  left: 50%;
 }
 
 @keyframes spin {
@@ -165,7 +171,7 @@ body {
     font-size: 10px;
   }
 
-  .socials1 {
+  .opensea {
     position: relative;
     top: -10%;
     left: 15%;
@@ -174,11 +180,7 @@ body {
     font-size: 12px;
     line-height: 9px;
     justify-content: center;
+    margin-top: 10px;
     margin-bottom: 10px;
-  }
-
-  .socials1 div {
-    /* margin-right: 50px;
-    margin-left: 50px; */
   }
 }
