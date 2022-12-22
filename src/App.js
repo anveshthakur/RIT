@@ -17,7 +17,7 @@ function App() {
   const [matches, setMatches] = useState(false);
   const [address, setAddress] = useState();
 
-  const metaMaskConnect = useMetamask()
+  const metaMaskConnect = useMetamask();
   // const address = useAddress();
   let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
   let openseadef = "https://opensea.io/assets/matic";
@@ -49,15 +49,14 @@ function App() {
   });
 
   useEffect(() => {
-    !isChrome && 
-    metaMaskConnect()
-    .then(res => {
-      if(res.data?.account){
-        setAddress(res.data?.account);
-      }else if(res.error){
-        console.log("error");
-      }
-    })
+    !isChrome &&
+      metaMaskConnect().then((res) => {
+        if (res.data?.account) {
+          setAddress(res.data?.account);
+        } else if (res.error) {
+          console.log("error");
+        }
+      });
   }, [address]);
 
   useEffect(() => {
@@ -80,29 +79,29 @@ function App() {
     const body = {
       address: addressFor,
       tokenId: `${openseadef}/${contractAddress}/${tokenId}`,
-      txHash: `${polygonLink}/tx/${txHash}`
+      txHash: `${polygonLink}/tx/${txHash}`,
     };
     console.log(body);
-    await axios.post("https://apitest.nfthing.com/successfulmint", body)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }
+    await axios
+      .post("https://apitest.nfthing.com/successfulmint", body)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   const claimNft = async (address) => {
     try {
       setLoading(true);
-      await contract.claimTo(address, 1)
-      .then((res) => {
-        const transactionHash = res[0].receipt.transactionHash
+      await contract.claimTo(address, 1).then((res) => {
+        const transactionHash = res[0].receipt.transactionHash;
         let tokenId = res[0].receipt.logs[0].topics[3];
         tokenId = parseInt(Number(tokenId));
         console.log("Making the API call");
-        makeApiCall(address, tokenId, transactionHash)
+        makeApiCall(address, tokenId, transactionHash);
         setLoading(false);
         navigate({
           pathname: "/opensea",
-          search: `?tokenId=${tokenId}`
-        })
+          search: `?tokenId=${tokenId}`,
+        });
       });
     } catch (error) {
       setLoading(false);
@@ -117,9 +116,8 @@ function App() {
         path="/"
         element={
           !isChrome ? (
-            // balance ? 
-            false ?
-            (
+            // balance ?
+            false ? (
               <OpenseaPage />
             ) : (
               <TestPage claimNft={claimNft} loading={loading} />
