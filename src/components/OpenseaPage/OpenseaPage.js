@@ -89,7 +89,7 @@ const OpenseaPage = () => {
               COLLECTION
             </h2>
           </div>
-          <div className="opensea1">
+          <div className="opensea">
             <div>
               <img src={opensea} alt="opensea"></img>
             </div>
