@@ -101,7 +101,7 @@ const OpenseaPage = () => {
           </div>
         </div>
       )}
-      <div className="socials">
+      <div className="socials1">
         <div className="gentext">
           {" "}
           //GENERATING <br></br> SOCIAL LINKS FROM INDEX
