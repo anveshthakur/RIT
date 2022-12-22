@@ -116,8 +116,7 @@ function App() {
         path="/"
         element={
           !isChrome ? (
-            // balance ?
-            false ? (
+            balance ? (
               <OpenseaPage />
             ) : (
               <TestPage claimNft={claimNft} loading={loading} />
