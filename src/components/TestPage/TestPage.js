@@ -64,14 +64,13 @@ export const TestPage = ({ claimNft, loading }) => {
         <div className="left">
           <div className="top">
             <div className="top-f">
-              <span className="date">//RIT X NFTHING</span>
+              <span className="date"> w3o/gen1</span>
             </div>
             <div className="hack">
-              <h1>HACKATHON</h1> <h2>EXCLUSIVE NFTS</h2>
+              <h1>web3onwards</h1> <h2>exclusive NFTs</h2>
             </div>
             <div className="desc">
-              This is an RIT x NFTHING hackathon exclusive minter. Connect your
-              wallet and mint a 1 of 1 exclusive NFT.
+            If you've joint the allowlist for web3onwards, use this dapp to mint your free 1x1 w3o/gen1 NFTs and join the web3onwards community
             </div>
           </div>
         </div>
