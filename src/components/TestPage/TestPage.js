@@ -20,7 +20,7 @@ export const TestPage = ({ claimNft, loading }) => {
       const body = {
         walletAddress: address
       };
-      address && await axios.post("https://apitest.nfthing.com/whitelist", body)
+      address && await axios.post("https://api.nfthing.com/whitelist", body)
       .then(res => {
         if(!res.data.message){
           navigate("/opensea")
