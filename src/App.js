@@ -83,7 +83,7 @@ function App() {
     };
     console.log(body);
     await axios
-      .post("https://apitest.nfthing.com/successfulmint", body)
+      .post("https://api.nfthing.com/successfulmint", body)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };

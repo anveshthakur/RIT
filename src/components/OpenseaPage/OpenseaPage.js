@@ -28,7 +28,7 @@ const OpenseaPage = () => {
         walletAddress: address,
       };
       axios
-        .post("https://apitest.nfthing.com/links", body)
+        .post("https://api.nfthing.com/links", body)
         .then((res) => {
           const openSeaLink = res.data.tokenId;
           setToken(openSeaLink.slice(75));
