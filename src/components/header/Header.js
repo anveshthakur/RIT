@@ -5,6 +5,7 @@ import vector from "../../logos/Vector.png";
 import { Link } from "react-router-dom";
 import polygon from "../../logos/polygon.png";
 import { changeNetwork } from '../Blockchain/networkMethods';
+import { useWalletConnect } from "@thirdweb-dev/react";
 
 const Header = ({ 
   connectWithMetamask, 
@@ -12,6 +13,8 @@ const Header = ({
   errLoad
   }) => {
   const [errMsg, setErrMsg] = useState(true);
+
+  const connectWithWalletConnect = useWalletConnect();
 
   const checkNetwork = async() => {    
     try{
@@ -50,6 +53,13 @@ const Header = ({
 
         <div className="button">
           <button onClick={connectWithMetamask}>
+            {address
+              ? address.slice(0, 4) + "...." + address.slice(-4)
+              : "Connect Wallet"}
+          </button>
+        </div>
+        <div className="button">
+          <button onClick={connectWithWalletConnect}>
             {address
               ? address.slice(0, 4) + "...." + address.slice(-4)
               : "Connect Wallet"}
