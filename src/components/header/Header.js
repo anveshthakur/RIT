@@ -10,11 +10,10 @@ import { useWalletConnect } from "@thirdweb-dev/react";
 const Header = ({ 
   connectWithMetamask, 
   address,
-  errLoad
+  errLoad,
+  isMobile
   }) => {
   const [errMsg, setErrMsg] = useState(true);
-
-  const connectWithWalletConnect = useWalletConnect();
 
   const checkNetwork = async() => {    
     try{
@@ -39,7 +38,7 @@ const Header = ({
           : "hidden" }}
       >
         <h1>PLEASE CONNECT TO POLYGON NETWORK</h1>
-        <button onClick={changeNetwork}>
+        <button onClick={() => changeNetwork(isMobile)}>
           <img src={polygon}></img>
         </button>
       </div>
@@ -53,13 +52,6 @@ const Header = ({
 
         <div className="button">
           <button onClick={connectWithMetamask}>
-            {address
-              ? address.slice(0, 4) + "...." + address.slice(-4)
-              : "Connect Wallet"}
-          </button>
-        </div>
-        <div className="button">
-          <button onClick={connectWithWalletConnect}>
             {address
               ? address.slice(0, 4) + "...." + address.slice(-4)
               : "Connect Wallet"}

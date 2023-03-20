@@ -5,8 +5,9 @@ import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { contract_getWhiteListed } from '../Blockchain/opensea'
 
-export const TestPage = ({ claimNft, loading }) => {
+export const TestPage = ({ claimNft, loading, isMobile }) => {
   const connectWithMetamask = useMetamask();
   const address = useAddress();
   const navigate = useNavigate();
@@ -17,17 +18,20 @@ export const TestPage = ({ claimNft, loading }) => {
   useEffect(() => {
     
     async function get_allowed() {
-      const body = {
-        walletAddress: address
-      };
-      address && await axios.post("https://api.nfthing.com/whitelist", body)
-      .then(res => {
-        if(!res.data.message){
-          navigate("/opensea")
-        }
-        setWhiteListed(res.data.message)
-      })
-      .catch(err => console.log(err))    
+      // const body = {
+      //   walletAddress: address
+      // };
+      // address && await axios.post("https://api.nfthing.com/whitelist", body)
+      // .then(res => {
+      //   if(!res.data.message){
+      //     navigate("/opensea")
+      //   }
+      //   setWhiteListed(res.data.message)
+      // })
+      // .catch(err => console.log(err)) 
+      
+      await contract_getWhiteListed(address)
+      .then(res => setWhiteListed(res)); 
     }
 
     async function check_network(){
@@ -59,6 +63,7 @@ export const TestPage = ({ claimNft, loading }) => {
         connectWithMetamask={connectWithMetamask}
         address={address}
         errLoad={errLoad}
+        isMobile={isMobile}
       />
       <div className="frame">
         <div className="left">

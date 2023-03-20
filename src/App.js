@@ -115,15 +115,15 @@ function App() {
       <Route
         path="/"
         element={
-          // !isChrome ? (
+          !isChrome ? (
             balance ? (
               <OpenseaPage />
             ) : (
-              <TestPage claimNft={claimNft} loading={loading} />
+              <TestPage claimNft={claimNft} loading={loading} isMobile={matches} />
             )
-          // ) : (
-            // <ChromePage />
-          // )
+          ) : (
+            <ChromePage />
+          )
         }
       />
       <Route path="/mobile" element={<ChromePage />} />
