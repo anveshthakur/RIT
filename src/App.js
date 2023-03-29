@@ -4,7 +4,7 @@ import OwnerMinter from "./components/OwnerMinter/OwnerMinter";
 import { useAddress, useContract, useMetamask } from "@thirdweb-dev/react";
 import { TestPage } from "./components/TestPage/TestPage";
 import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
-import { contract_balanceOf } from "./components/Blockchain/opensea";
+import { contract_balanceOf, contract_getWhiteListed } from "./components/Blockchain/opensea";
 import { useEffect, useState } from "react";
 import ChromePage from "./components/ChromePage/ChromePage";
 import axios from "axios";
@@ -16,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState(false);
   const [address, setAddress] = useState();
+  const [whiteListed, setWhiteListed] = useState(false);
 
   const metaMaskConnect = useMetamask();
   // const address = useAddress();
@@ -64,11 +65,33 @@ function App() {
       address &&
         (await contract_balanceOf(address).then((res) => {
           setBalance(res);
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000)
         }));
     }
     getBalance();
+    getAllowed();
   }, [address]);
+
+  async function getAllowed() {
+    // const body = {
+    //   walletAddress: address
+    // };
+    // address && await axios.post("https://api.nfthing.com/whitelist", body)
+    // .then(res => {
+    //   if(!res.data.message){
+    //     navigate("/opensea")
+    //   }
+    //   setWhiteListed(res.data.message)
+    // })
+    // .catch(err => console.log(err)) 
+    
+    await contract_getWhiteListed(address)
+    .then(res => {
+      setWhiteListed(res)
+    }); 
+  }
 
   const { contract } = useContract(
     process.env.REACT_APP_CONTRACT_ADDRESS,
@@ -116,11 +139,12 @@ function App() {
         path="/"
         element={
           !isChrome ? (
-            balance ? (
-              <OpenseaPage />
-            ) : (
-              <TestPage claimNft={claimNft} loading={loading} isMobile={matches} />
-            )
+            
+            !whiteListed ? (<OpenseaPage />)
+            :
+            whiteListed && balance 
+            ? (<OpenseaPage />)
+            : (<TestPage claimNft={claimNft} loading={loading} isMobile={matches} whiteListed={whiteListed} />)
           ) : (
             <ChromePage />
           )

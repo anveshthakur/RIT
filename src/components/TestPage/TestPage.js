@@ -4,35 +4,15 @@ import "./TestPage.css";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { contract_getWhiteListed } from '../Blockchain/opensea'
 
-export const TestPage = ({ claimNft, loading, isMobile }) => {
+export const TestPage = ({ claimNft, loading, isMobile, whiteListed }) => {
   const connectWithMetamask = useMetamask();
   const address = useAddress();
   const navigate = useNavigate();
 
   const [errLoad, setErrLoad] = useState(false);
-  const [whiteListed, setWhiteListed] = useState(false);
 
   useEffect(() => {
-    
-    async function get_allowed() {
-      // const body = {
-      //   walletAddress: address
-      // };
-      // address && await axios.post("https://api.nfthing.com/whitelist", body)
-      // .then(res => {
-      //   if(!res.data.message){
-      //     navigate("/opensea")
-      //   }
-      //   setWhiteListed(res.data.message)
-      // })
-      // .catch(err => console.log(err)) 
-      
-      await contract_getWhiteListed(address)
-      .then(res => setWhiteListed(res)); 
-    }
 
     async function check_network(){
       const chainId = 137;
@@ -43,7 +23,6 @@ export const TestPage = ({ claimNft, loading, isMobile }) => {
       }
     }
     
-    get_allowed();
     check_network();
   }, [address, errLoad]);
 
@@ -94,11 +73,11 @@ export const TestPage = ({ claimNft, loading, isMobile }) => {
             <div
               className="counter"
               style={{
-                backgroundColor: address && whiteListed ? "black" : "#D6D6D6",
+                backgroundColor: address && whiteListed && !errLoad ? "black" : "#D6D6D6",
               }}
             >
               {/* disable address button if address is null or undefined */}
-              {address && whiteListed ? (
+              {address && whiteListed && !errLoad ? (
                 loading ? (
                   <div
                     style={{ transform: "skew(25deg)", "marginTop": "0.7vh" }}

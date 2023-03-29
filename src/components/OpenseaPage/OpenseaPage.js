@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import "./OpenseaPage.css";
-import { tokensOfOwner } from "../Blockchain/opensea";
+import { contract_ownerOf, tokensOfOwner } from "../Blockchain/opensea";
 import opensea from "../../logos/opensea.png";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
@@ -22,23 +22,34 @@ const OpenseaPage = () => {
     metaMaskConnect();
     if (searchParams.get("tokenId")) {
       setToken(searchParams.get("tokenId"));
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000)
     } else {
-      const body = {
-        walletAddress: address,
-      };
-      axios
-        .post("https://api.nfthing.com/links", body)
-        .then((res) => {
-          const openSeaLink = res.data.tokenId;
-          setToken(openSeaLink.slice(75));
-          setLoading(false);
-        })
-        .catch((err) => {
-          setToken(null);
-          setLoading(false);
-          console.log(err);
-        });
+      
+      const URL = `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x4694b1c3734e9dd182f58ae74d204d6e7e9a1a97&address=${address}&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=G5C32S5CUJVPB15EVWECNUH12MMHQK8FD7`
+      
+      address && axios.get(URL)
+            .then((res) => {
+                  const data=(res.data.result)
+                  console.log(data)  
+                data.map(async(item, key)=>{
+                  console.log(item)
+                  const owner = await contract_ownerOf(item.tokenID);
+                  if(owner == address){
+                      setToken(item.tokenID);
+                  }
+                })
+                setTimeout(() => {
+                  setLoading(false);
+                }, 1000)
+            })
+            .catch((err) => {
+                setTimeout(() => {
+                  setLoading(false);
+                }, 1000)
+                console.log(err);
+            })
     }
   }, [address]);
 

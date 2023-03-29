@@ -22,12 +22,23 @@ export async function tokensOfOwner(address){
     }
 }
 
-export async function contract_balanceOf(address){
+export async function contract_ownerOf(tokenId){
     const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
     const contract = new ethers.Contract(
         contract_addr,
         abi,
         new ethers.providers.Web3Provider(window.ethereum)
+    )
+    return await contract.ownerOf(tokenId);
+}
+
+export async function contract_balanceOf(address){
+    console.log(address);
+    const contract_addr = process.env.REACT_APP_CONTRACT_ADDRESS;
+    const contract = new ethers.Contract(
+        contract_addr,
+        abi,
+        new ethers.providers.AlchemyProvider("matic", "g-wCwIWjajDiWsIHm-NhJVKnm_aSrb2W")
     )
     return ((await contract.balanceOf(address)).toNumber());
 }
@@ -54,6 +65,9 @@ export async function contract_getWhiteListed(address){
         {addr: "0x47182D6a394396C6A84AA9bE4fa987721984838B", qty: 0},
         {addr: "0x32e28E36384beA019e9d09e72aB83E0bC7831bE0", qty: 0},
         {addr: "0x93f88B1B1711Ffb5584B121Fe01313dDf1155EC0", qty: 0},
+        {addr: "0x8c94cd2232b94CF24baE6B27317d1dA2e9F21950", qty: 0},
+        {addr: "0xF506A70B20E825EDA4A6b7fB02ff1d8a50726463", qty: 0},
+        {addr: "0x2624fB9e4193eb2102274cb091bc76Cf1f3F6e8E", qty: 0}
 
     ]
     snapshot.map(l => whiteListSet.add(l.addr));
