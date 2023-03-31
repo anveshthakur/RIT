@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../header/Header";
 import { BsTwitter, BsInstagram } from "react-icons/bs";
 import "./OpenseaPage.css";
-import { contract_ownerOf, tokensOfOwner } from "../Blockchain/opensea";
+import { contract_ownerOf } from "../Blockchain/opensea";
 import opensea from "../../logos/opensea.png";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
@@ -20,16 +20,15 @@ const OpenseaPage = () => {
 
   useEffect(() => {
     metaMaskConnect();
+    setLoading(true);
     if (searchParams.get("tokenId")) {
       setToken(searchParams.get("tokenId"));
       setTimeout(() => {
         setLoading(false);
       }, 1000)
     } else {
-      
-      const URL = `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x4694b1c3734e9dd182f58ae74d204d6e7e9a1a97&address=${address}&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=G5C32S5CUJVPB15EVWECNUH12MMHQK8FD7`
-      
-      address && axios.get(URL)
+      const URL = `https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x4694b1c3734e9dd182f58ae74d204d6e7e9a1a97&address=${address}&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=G5C32S5CUJVPB15EVWECNUH12MMHQK8FD7`    
+      address ? axios.get(URL)
             .then((res) => {
                   const data=(res.data.result)
                   console.log(data)  
@@ -50,6 +49,7 @@ const OpenseaPage = () => {
                 }, 1000)
                 console.log(err);
             })
+            : setLoading(false)
     }
   }, [address]);
 

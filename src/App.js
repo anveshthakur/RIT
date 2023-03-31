@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import OwnerMinter from "./components/OwnerMinter/OwnerMinter";
-import { useAddress, useContract, useMetamask } from "@thirdweb-dev/react";
+import { useContract, useMetamask } from "@thirdweb-dev/react";
 import { TestPage } from "./components/TestPage/TestPage";
 import OpenseaPage from "./components/OpenseaPage/OpenseaPage";
 import { contract_balanceOf, contract_getWhiteListed } from "./components/Blockchain/opensea";
@@ -138,8 +138,9 @@ function App() {
       <Route
         path="/"
         element={
-          !isChrome ? (
-            
+          !isChrome ? ( 
+            address === undefined  ?  (<TestPage claimNft={claimNft} loading={loading} isMobile={matches} whiteListed={false} />)
+            :
             !whiteListed ? (<OpenseaPage />)
             :
             whiteListed && balance 
