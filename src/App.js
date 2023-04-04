@@ -17,6 +17,7 @@ function App() {
   const [matches, setMatches] = useState(false);
   const [address, setAddress] = useState();
   const [whiteListed, setWhiteListed] = useState(false);
+  const [isBrave, setBrave]=useState(false)
 
   const metaMaskConnect = useMetamask();
   // const address = useAddress();
@@ -41,10 +42,25 @@ function App() {
     if (typeof window.ethereum !== "undefined") {
       setMetabrowser(true);
     }
+    
+      if (window.navigator.brave != undefined) {
+        if (window.navigator.brave.isBrave.name == "isBrave") {
+          setBrave(true);
+        } else {
+          setBrave(false);
+        }
+      } else {
+        setBrave(false);
+      }
+    
+    
   });
 
   useEffect(() => {
-    if (matches && !metabrowser) {
+    if (matches && !metabrowser ) {
+      setIsChrome(true);
+    }
+    if(matches && isBrave){
       setIsChrome(true);
     }
   });
@@ -138,7 +154,7 @@ function App() {
       <Route
         path="/"
         element={
-          !isChrome ? ( 
+          !isChrome  ? ( 
             address === undefined  ?  (<TestPage claimNft={claimNft} loading={loading} isMobile={matches} whiteListed={false} />)
             :
             !whiteListed ? (<OpenseaPage />)
