@@ -105,7 +105,7 @@ const OpenseaPage = () => {
               <img src={opensea} alt="opensea"></img>
             </div>
             <div>
-              <a href={`https://opensea.io/collection/crypto-legomen`}>
+              <a href={`https://opensea.io/collection/w3o-gen1`}>
                 VIEW ON OPENSEA
               </a>
             </div>
