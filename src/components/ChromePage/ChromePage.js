@@ -58,7 +58,7 @@ const ChromePage = () => {
         <div className="metamask">
           <a
             className="deeplink"
-            href="https://metamask.app.link/dapp/minting-dapp-42401.web.app/"
+            href="https://metamask.app.link/dapp/rit.nfthing.com"
           >
             OPEN METAMASK
           </a>
