@@ -91,22 +91,23 @@ function App() {
   }, [address]);
 
   async function getAllowed() {
-    // const body = {
-    //   walletAddress: address
-    // };
-    // address && await axios.post("https://api.nfthing.com/whitelist", body)
-    // .then(res => {
-    //   if(!res.data.message){
-    //     navigate("/opensea")
-    //   }
-    //   setWhiteListed(res.data.message)
-    // })
-    // .catch(err => console.log(err)) 
-    
-    await contract_getWhiteListed(address)
+    const body = {
+      walletAddress: address
+    };
+    address && await axios.post("https://api.nfthing.com/whitelist", body)
     .then(res => {
-      setWhiteListed(res)
-    }); 
+      if(!res.data.message){
+        navigate("/opensea")
+      }
+      console.log(res.data.message);
+      setWhiteListed(res.data.message)
+    })
+    .catch(err => console.log(err)) 
+    
+    // await contract_getWhiteListed(address)
+    // .then(res => {
+    //   setWhiteListed(res)
+    // }); 
   }
 
   const { contract } = useContract(
